@@ -1,4 +1,3 @@
-document.body.innerHTML = '<span>Welcome</span>';
 import { Game } from 'phaser';
 import main from './scenes/main';
 import { config } from './config';
