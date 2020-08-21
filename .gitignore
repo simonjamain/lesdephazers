@@ -8,3 +8,13 @@ npm-debug.log*
 /.cache
 *.code-workspace
 *~
+# dependencies
+/node_modules
+
+# production
+/dist
+
+npm-debug.log*
+/.cache
+*.code-workspace
+*~

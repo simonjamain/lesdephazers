@@ -3,3 +3,22 @@ span
 	color: green;
 }
 
+html,
+body
+{
+	display: flex;
+	justify-content: flex-start;
+	align-items:center;
+	height: 100%;
+	margin: 0;
+	background-color: #999;
+	overflow: hidden;
+}
+
+canvas
+{
+	display: block;
+	/* width: 800px; */
+	height: 100%;
+}
+
