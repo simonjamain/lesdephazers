@@ -1,6 +1,6 @@
 import { Scene, Input, GameObjects } from 'phaser';
 
-export default class CellSprite extends GameObjects.Sprite {
+class CellSprite extends GameObjects.Sprite {
 	constructor(scene, cell, x, y, color, scale = 1) {
 
 		super(scene, x, y, type);
@@ -13,3 +13,5 @@ export default class CellSprite extends GameObjects.Sprite {
 	}
 
 }
+
+export default CellSprite;
