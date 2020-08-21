@@ -1,10 +1,10 @@
 class Player
 {
-    constructor(game, color)
+    constructor(exNihilo, color)
     {
-        this.game = game;
-        this.nbActionMax = this.game.nbActionMaxDefault
-        this.nbActionsLeft = this.game.nbActionOnStartupDefault
-        this.color = color
+        this.exNihilo = exNihilo;
+        this.nbActionMax = this.exNihilo.nbActionMaxDefault;
+        this.nbActionsLeft = this.exNihilo.nbActionOnStartupDefault;
+        this.color = color;
     }
 }
