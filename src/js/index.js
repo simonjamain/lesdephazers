@@ -4,10 +4,6 @@ import { config } from './config';
 
 import { ExNihilo } from './gameClasses/ExNihilo';
 
-const exNihilo = new ExNihilo();
-document.exNihilo = exNihilo;
-exNihilo.init(10, 10);
-
 const gameConfig = {
 	...config,
 	scene: [MainScene],
