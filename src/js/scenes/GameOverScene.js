@@ -8,7 +8,6 @@ export default class GameOverScene extends Scene {
 
 	init(data) {
 		this.exNihilo = data.exNihilo;
-		console.log('overinit')
 	}
 
 	preload() {
