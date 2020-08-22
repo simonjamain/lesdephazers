@@ -3,23 +3,36 @@ import CellSprite from './CellSprite';
 import { gameSettings } from '../config';
 
 export default class Cell {
-	constructor(exNihilo, scene, col, row, action1, action2, rule) {
+
+	constructor(exNihilo, scene, row, col, action1, action2, rule) {
+		//console.log('action1', typeof action1 === undefined, typeof action2 === undefined)
 
 		this.exNihilo = exNihilo;
+		this.scene = scene;
 
 		this.col = col;
 		this.row = row;
 
 		this.side = gameSettings.grid.cellSide;
 
+		this.x = this.getCoord().x;
+		this.y = this.getCoord().y;
+
 		this.action1 = action1;
 		this.action2 = action2;
 
 		this.player = null;
+		this.color = this.player?.color ? this.player.color : 0xffffff;
 
+		this.cellSprite = new CellSprite(this);
 		this.rule = rule;
-
 		this.cellSprite = new CellSprite(this.exNihilo, scene, this, this.getCoord().x, this.getCoord().y, this.side, this.player?.color ? this.player.color : null);
+	}
+
+	setPlayer = (player) => {
+		this.player = player;
+		this.color = this.player?.color ? this.player.color : 0xffffff;
+		this.cellSprite.init(this);
 	}
 
 	getCoord() {

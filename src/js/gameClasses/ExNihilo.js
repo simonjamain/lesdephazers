@@ -5,18 +5,15 @@ import CellIterationRule from './CellIterationRule';
 import CellActionRule from './CellActionRule';
 /** import FinalStateRule from './FinalStateRule'; */
 
-export class ExNihilo
-{
-	init({scene, w, h})
-	{
+export class ExNihilo {
+	init({ scene, w, h }) {
 		this.cellActionRule = new CellActionRule(this);
 		this.cellIterationRule = new CellIterationRule(this);
 
 		this.cells = [];
-		for (let i = 0; i < w; i++)
-		{
+		for (let i = 0; i < w; i++) {
 			this.cells[i] = [];
-			for (let j = 0; j < h; j ++)
+			for (let j = 0; j < h; j++)
 				this.cells[i][j] = new Cell(
 					this,
 					scene,
@@ -29,8 +26,8 @@ export class ExNihilo
 		}
 
 		this.nbActionOnStartupDefault = 2;
-		this.player = {color: 0xff0000};
-		this.playerFake = {color: 0x00ff00};
+		this.player = { color: 0xff0000 };
+		this.playerFake = { color: 0x00ff00 };
 		this.players = [];
 		this.munitionMaxDefault = 5;
 		this.finalStateRule = 'finalStateRule';
@@ -50,7 +47,6 @@ export class ExNihilo
 
 	iterateCells()
 	{
-		console.log('iterate');
 		this.cells = this.cells.map(i => {
 			i.map(j => {
 				j.iterate();
@@ -64,12 +60,9 @@ export class ExNihilo
 
 	/** From server */
 	/** @param action : 'action1', 'action2', etc. */
+
 	getAction(action, player, x, y)
 	{
-		console.log(action);
-		console.log(player);
-		console.log(x);
-		console.log(y);
 		if (action === 'iterateCells')
 			this.iterateCells()
 		else
@@ -80,13 +73,13 @@ export class ExNihilo
 	 * Action from server - END
 	 */
 
-	checkFinalState()
-	{
+	checkFinalState() {
 		return false;
 	}
 
 	/** To server */
 	/** @param action : 'action1', 'action2', etc. */
+
 	doAction(action, x, y)
 	{
 		this.getAction(action, this.player, x, y); /** TODO : to Delete finally */
@@ -95,8 +88,7 @@ export class ExNihilo
 		/** Send this.player */
 	}
 
-	find(cell)
-	{
-		return {x: cell.x, y: cell.y};
+	find(cell) {
+		return { x: cell.x, y: cell.y };
 	}
 }
