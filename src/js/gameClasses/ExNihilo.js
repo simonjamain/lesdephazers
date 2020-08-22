@@ -3,7 +3,7 @@ import Player from './Player';
 import Cell from './Cell';
 import CellIterationRule from './CellIterationRule';
 import CellActionRule from './CellActionRule';
-/** import FinalStateRule from './FinalStateRule'; */
+import FinalStateRule from './FinalStateRule';
 
 export class ExNihilo {
 	timeElapsed = 0;
@@ -36,15 +36,14 @@ export class ExNihilo {
 			this.playerFake
 		];
 		this.munitionMaxDefault = 5;
-		this.finalStateRule = 'finalStateRule';
+		this.finalStateRule = new FinalStateRule(this);
 		this.iterationDuration = 10; /** seconds */
 		this.elapsedTime = 0; /** seconds */
 
-		setInterval(() => {
+		this.interateInterval = setInterval(() => {
 			this.iterateCells();
 		}, this.iterationDuration * 1000);
 
-		console.log(this);
 	}
 
 	/**

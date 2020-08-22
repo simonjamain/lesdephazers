@@ -4,8 +4,8 @@ export default class FinalStateRule {
     }
 
     checkState() {
-        if (this.exNihilo.elapsedTime >= 120) {
-            //this.exNihilo.scene.scene.pause();
+        if (this.exNihilo.elapsedTime >= 5) {
+            console.log('clear  ', clearInterval(this.exNihilo.interateInterval));
 
             this.exNihilo.cells.map(i => i.map(j => {
                 if (j.player !== null)
