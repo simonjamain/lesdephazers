@@ -31,8 +31,6 @@ export class ExNihilo {
 		this.finalStateRule = 'finalStateRule';
 		this.iterationDuration = 30; /** seconds */
 		this.elapsedTime = 0; /** seconds */
-
-		console.log(this);
 	}
 
 	/**
@@ -68,7 +66,7 @@ export class ExNihilo {
 	/** To server */
 	/** @param action : 'action1', 'action2', etc. */
 	doAction(action, x, y) {
-		getAction(action, this.player, x, y); /** TODO : to Delete finally */
+		this.getAction(action, this.player, x, y); /** TODO : to Delete finally */
 		/** To server : */
 		/** Send action */
 		/** Send this.player */

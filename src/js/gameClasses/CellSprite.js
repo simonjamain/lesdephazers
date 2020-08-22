@@ -13,10 +13,10 @@ class CellSprite extends GameObjects.Rectangle {
 
 		this.on('pointerdown', (pointer) => {
 			if (pointer.rightButtonDown()) {
-				this.cell.exNihilo.doAction('action2', this.cell.player, this.cell.row, this.cell.col);
+				this.cell.exNihilo.doAction('action2', this.cell.row, this.cell.col);
 			}
 			else if (pointer.leftButtonDown()) {
-				this.cell.exNihilo.doAction('action1', this.cell.player, this.cell.row, this.cell.col);
+				this.cell.exNihilo.doAction('action1', this.cell.row, this.cell.col);
 			}
 		}, this);
 	}

@@ -4,11 +4,13 @@ import { gameSettings } from '../config';
 
 export default class Cell {
 	constructor(exNihilo, scene, row, col, action1, action2) {
+		//console.log('action1', typeof action1 === undefined, typeof action2 === undefined)
 		this.exNihilo = exNihilo;
 		this.scene = scene;
 
 		this.col = col;
 		this.row = row;
+
 		this.side = gameSettings.grid.cellSide;
 
 		this.x = this.getCoord().x;
