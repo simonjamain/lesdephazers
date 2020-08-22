@@ -11,8 +11,9 @@ export default class CellActionRule
             cell.player = player;
     }
 
-    neutralize()
+    neutralize(player, cell, force = false)
     {
-        this.player = null;
+        if (force || cell.player.color != player.color)
+            cell.player = null;
     }
 }

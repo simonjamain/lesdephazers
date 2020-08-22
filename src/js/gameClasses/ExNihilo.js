@@ -1,15 +1,16 @@
 import { gameSettings } from '../config';
-import Cell from './Cell';
 /** import Player from './Player'; */
-// import CellIterationRule from './CellIterationRule';
-/** import FinalStateRule from './FinalStateRule'; */
+import Cell from './Cell';
+import CellIterationRule from './CellIterationRule';
 import CellActionRule from './CellActionRule';
+/** import FinalStateRule from './FinalStateRule'; */
 
 export class ExNihilo
 {
 	init({scene, w, h})
 	{
 		this.cellActionRule = new CellActionRule(this);
+		this.cellIterationRule = new CellIterationRule(this);
 
 		this.cells = [];
 		for (let i = 0; i < w; i++)
@@ -22,7 +23,8 @@ export class ExNihilo
 					j,
 					i,
 					this.cellActionRule[gameSettings.actions.action1],
-					this.cellActionRule[gameSettings.actions.action2]
+					this.cellActionRule[gameSettings.actions.action2],
+					this.cellIterationRule[gameSettings.rule]
 				);
 		}
 
@@ -32,8 +34,12 @@ export class ExNihilo
 		this.players = [];
 		this.munitionMaxDefault = 5;
 		this.finalStateRule = 'finalStateRule';
-		this.iterationDuration = 30; /** seconds */
+		this.iterationDuration = 10; /** seconds */
 		this.elapsedTime = 0; /** seconds */
+
+		setInterval(() => {
+			this.iterateCells();
+		}, this.iterationDuration * 1000);
 
 		console.log(this);
 	}
@@ -44,10 +50,14 @@ export class ExNihilo
 
 	iterateCells()
 	{
+		console.log('iterate');
 		this.cells = this.cells.map(i => {
 			i.map(j => {
-				j.ierate();
+				j.iterate();
+				// console.log(j);
+				return j;
 			});
+			return i;
 		});
 		this.checkFinalState();
 	}
@@ -56,6 +66,10 @@ export class ExNihilo
 	/** @param action : 'action1', 'action2', etc. */
 	getAction(action, player, x, y)
 	{
+		console.log(action);
+		console.log(player);
+		console.log(x);
+		console.log(y);
 		if (action === 'iterateCells')
 			this.iterateCells()
 		else
@@ -75,7 +89,7 @@ export class ExNihilo
 	/** @param action : 'action1', 'action2', etc. */
 	doAction(action, x, y)
 	{
-		getAction(action, this.player, x, y); /** TODO : to Delete finally */
+		this.getAction(action, this.player, x, y); /** TODO : to Delete finally */
 		/** To server : */
 		/** Send action */
 		/** Send this.player */

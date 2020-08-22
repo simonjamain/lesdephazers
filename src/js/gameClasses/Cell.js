@@ -3,7 +3,7 @@ import CellSprite from './CellSprite';
 import { gameSettings } from '../config';
 
 export default class Cell {
-	constructor(exNihilo, scene, col, row, action1, action2) {
+	constructor(exNihilo, scene, col, row, action1, action2, rule) {
 
 		this.exNihilo = exNihilo;
 
@@ -17,6 +17,8 @@ export default class Cell {
 
 		this.player = null;
 
+		this.rule = rule;
+
 		this.cellSprite = new CellSprite(this.exNihilo, scene, this, this.getCoord().x, this.getCoord().y, this.side, this.player?.color ? this.player.color : null);
 	}
 
@@ -27,4 +29,8 @@ export default class Cell {
 		};
 	}
 	// exNihilo.doAction(action);
+
+	iterate() {
+		this.rule(this);
+	}
 }

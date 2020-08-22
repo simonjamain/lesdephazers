@@ -36,6 +36,7 @@ const gameSettings = {
         action1: 'convert',
         action2: 'neutralize'
     },
+    rule: 'basic',
     player: {
         speedX: 100,
         speedY: 70,
