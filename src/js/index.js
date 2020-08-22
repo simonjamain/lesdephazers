@@ -1,7 +1,6 @@
 import { Game } from 'phaser';
 import MainScene from './scenes/MainScene';
 import { config } from './config';
-import { ExNihilo } from './gameClasses/ExNihilo';
 
 const gameConfig = {
 	...config,
@@ -9,10 +8,3 @@ const gameConfig = {
 };
 
 const game = new Game(gameConfig);
-
-const exNihilo = new ExNihilo();
-exNihilo.init({
-	game: game,
-	x:10,
-	y:10
-});

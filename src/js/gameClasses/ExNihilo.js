@@ -6,9 +6,8 @@ import Cell from './Cell';
 
 export class ExNihilo
 {
-	init({game, w, h})
+	init({scene, w, h})
 	{
-		console.log(game.scene);
 		this.cells = [];
 		this.nbActionOnStartupDefault = 2;
 
@@ -16,7 +15,7 @@ export class ExNihilo
 		{
 			this.cells[i] = [];
 			for (let j = 0; j < h; j ++)
-				this.cells[i][j] = new Cell(this, game.scene, 'action1', 'action2');
+				this.cells[i][j] = new Cell(this, scene, 'action1', 'action2');
 		}
 		this.players = [];
 		this.munitionMaxDefault = 5;
