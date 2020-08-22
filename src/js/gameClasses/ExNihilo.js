@@ -1,13 +1,14 @@
-/** import Cell from ./Cell */
-/** import Player from ./Player */
-/** import CellIterationRule from ./CellIterationRule */
-/** import FinalStateRule from ./FinalStateRule */
-/** import CellActionRule from ./CellActionRule */
+import Cell from './Cell';
+/** import Player from './Player'; */
+/** import CellIterationRule from './CellIterationRule'; */
+/** import FinalStateRule from './FinalStateRule'; */
+/** import CellActionRule from './CellActionRule'; */
 
 export class ExNihilo
 {
-	init(w, h)
+	init({game, w, h})
 	{
+		console.log(game.scene);
 		this.cells = [];
 		this.nbActionOnStartupDefault = 2;
 
@@ -15,7 +16,7 @@ export class ExNihilo
 		{
 			this.cells[i] = [];
 			for (let j = 0; j < h; j ++)
-				this.cells[i][j] = 'cell';
+				this.cells[i][j] = new Cell(this, game.scene, 'action1', 'action2');
 		}
 		this.players = [];
 		this.munitionMaxDefault = 5;

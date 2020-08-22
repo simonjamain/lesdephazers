@@ -12,7 +12,7 @@ export default class Cell {
 
 		this.player = null;
 
-		this.cellSprite = new CellSprite(scene, this, x, y, this.player?.color);
+		// this.cellSprite = new CellSprite(scene, this, x, y, this.player?.color);
 	}
 
 	iterate = () => {
