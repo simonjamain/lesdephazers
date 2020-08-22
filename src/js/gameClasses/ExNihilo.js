@@ -73,8 +73,9 @@ export class ExNihilo
 
 	/** To server */
 	/** @param action : 'action1', 'action2', etc. */
-	doAction(action, player, x, y)
+	doAction(action, x, y)
 	{
+		getAction(action, this.player, x, y); /** TODO : to Delete finally */
 		/** To server : */
 		/** Send action */
 		/** Send this.player */
