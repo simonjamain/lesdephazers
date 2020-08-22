@@ -21,7 +21,7 @@ export default class CellIterationRule
         if (typeof(this.exNihilo.cells[cell.col][cell.row + 1]) !== 'undefined' &&
             this.exNihilo.cells[cell.col][cell.row + 1].player !== null)
             {
-                counter = counter.map(m => {
+                counter.forEach(m => {
                     if (m.player.color === this.exNihilo.cells[cell.col][cell.row + 1].player.color)
                         m.count += 1;
                     else
@@ -29,13 +29,13 @@ export default class CellIterationRule
                             player: this.exNihilo.cells[cell.col][cell.row + 1].player,
                             count: 1
                         };
-             })
+                })
             }
 
         if (typeof(this.exNihilo.cells[cell.col + 1]) !== 'undefined' &&
             this.exNihilo.cells[cell.col + 1][cell.row].player !== null)
             {
-                counter = counter.map(m => {
+                counter.forEach(m => {
                     if (m.player.color === this.exNihilo.cells[cell.col + 1][cell.row].player.color)
                         m.count += 1
                     else
@@ -43,13 +43,13 @@ export default class CellIterationRule
                             player: this.exNihilo.cells[cell.col + 1][cell.row].player,
                             count: 1
                         };
-             })
+                })
             }
 
         if (typeof(this.exNihilo.cells[cell.col][cell.row - 1]) !== 'undefined' &&
             this.exNihilo.cells[cell.col][cell.row - 1].player !== null)
             {
-                counter = counter.map(m => {
+                counter.forEach(m => {
                     if (m.player.color === this.exNihilo.cells[cell.col][cell.row - 1].player.color)
                         m.count += 1;
                     else
@@ -57,17 +57,22 @@ export default class CellIterationRule
                         player: this.exNihilo.cells[cell.col][cell.row - 1].player,
                         count: 1
                     };
-             })
+                })
             }
 
-        if (counter.length >= 1)
+        if (counter.length > 0)
             console.log(counter);
-        // if(!cell.player && counter.length > 0 && counter.length < 3)
-        // {
-        //     console.log('multipass');
-        //     counter.map(m => m.count >= 3 ? cell.setPlayer(m.player) : null);
-        // }
-        // else if (cell.player && counter.length !== 0)
-        //     cell.setPlayer(null);
+        if(counter.length > 0)
+            counter.map(m => {
+                if (cell.futurPlayer === null)
+                {
+                    if (cell.player === null && m.count >= 3)
+                        cell.futurPlayer = m.player; //cell.setPlayer(m.player);
+                    if (cell.player !== null && m.count <= 1)
+                        cell.futurPlayer = null; //cell.setPlayer(null);
+                }
+            });
+        else
+            cell.futurPlayer = null; //cell.setPlayer(null);
     }
 }

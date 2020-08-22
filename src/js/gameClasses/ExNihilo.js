@@ -47,13 +47,17 @@ export class ExNihilo {
 
 	iterateCells()
 	{
-		this.cells = this.cells.map(i => {
-			i.map(j => {
+		this.cells.forEach(i => {
+			i.forEach(j => {
 				j.iterate();
-				// console.log(j);
-				return j;
 			});
-			return i;
+		});
+		this.cells.forEach(col => {
+			col.forEach(row => {
+				row.player = row.futurPlayer;
+				row.futurPlayer = null;
+				row.setPlayer(row.player);
+			})
 		});
 		this.checkFinalState();
 	}
