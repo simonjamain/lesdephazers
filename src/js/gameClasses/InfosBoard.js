@@ -21,10 +21,10 @@ export default class InfoBoard {
 			this.generationBarWidth, 10,
 			0xf2f2f2, 1);
 
-		console.log('window.innerWidth / 2 - this.generationBarWidth / 2', window.innerWidth / 2 - this.generationBarWidth / 2)
+		// console.log('window.innerWidth / 2 - this.generationBarWidth / 2', window.innerWidth / 2 - this.generationBarWidth / 2)
 
 		this.scene.add.existing(this.generationBar);
-		console.log('this.generationBar', this.generationBar)
+		// console.log('this.generationBar', this.generationBar)
 
 		this.timeText = this.scene.add.text(window.innerWidth - 280, gameSettings.score.text.y, 'Time : ', {
 			color: '#f2f2f2', align: 'center', fontFamily: 'cursive', fontSize: 40

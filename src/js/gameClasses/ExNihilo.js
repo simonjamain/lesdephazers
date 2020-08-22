@@ -31,13 +31,14 @@ export class ExNihilo {
 					this.cellIterationRule[gameSettings.rule]
 				);
 		}
-		console.log(this.cells)
+		// console.log(this.cells)
 
 		this.scene = scene;
 		this.nbActionOnStartupDefault = 2;
 		this.player = { color: Math.round(Math.random() * 0xffffff) };
 		this.multiplayerServer.sendNewPlayer(this.player.color)
 		this.players = [];
+		this.players.push(this.player)
 
 		this.munitionMaxDefault = 5;
 		this.finalStateRule = new FinalStateRule(this);
@@ -56,7 +57,8 @@ export class ExNihilo {
 
 	iterateCells(iterationDuration) {
 		this.iterationDuration = iterationDuration;
-		this.infosBoard.updateGenerationBar(this.iterationDuration);
+		console.log('this.iterationDuration', this.iterationDuration)
+		// this.infosBoard.updateGenerationBar(this.iterationDuration);
 
 		this.cells.forEach(i => {
 			i.forEach(j => {
@@ -72,14 +74,16 @@ export class ExNihilo {
 			})
 		});
 		this.checkFinalState();
+		// console.log("iteration");
 	}
 
 	/** From server */
 	/** @param action.action : 'action1', 'action2', etc. */
 	getAction(action) {
-		console.log(action)
-		console.log(this)
-		this.cells[action.i][action.j][action.action](this.findPlayer(action.playerColor), this.cells[action.i][action.j]);
+		// console.log(action.playerColor)
+		// console.log(this.findPlayer(action.playerColor))
+
+		this.cells[action.j][action.i][action.action](this.findPlayer(action.playerColor), this.cells[action.j][action.i]);
 	}
 
 	/**
