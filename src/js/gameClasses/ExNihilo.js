@@ -1,11 +1,13 @@
 import { gameSettings } from '../config';
-/** import Player from './Player'; */
+import Player from './Player';
 import Cell from './Cell';
 import CellIterationRule from './CellIterationRule';
 import CellActionRule from './CellActionRule';
-/** import FinalStateRule from './FinalStateRule'; */
+import FinalStateRule from './FinalStateRule';
 
 export class ExNihilo {
+	timeElapsed = 0;
+
 	init({ scene, w, h }) {
 		this.cellActionRule = new CellActionRule(this);
 		this.cellIterationRule = new CellIterationRule(this);
@@ -25,20 +27,23 @@ export class ExNihilo {
 				);
 		}
 
+		this.scene = scene;
 		this.nbActionOnStartupDefault = 2;
-		this.player = { color: 0xff0000 };
-		this.playerFake = { color: 0x00ff00 };
-		this.players = [];
+		this.player = new Player(this, 0xff0000);
+		this.playerFake = new Player(this, 0x00ff00);
+		this.players = [
+			this.player,
+			this.playerFake
+		];
 		this.munitionMaxDefault = 5;
-		this.finalStateRule = 'finalStateRule';
+		this.finalStateRule = new FinalStateRule(this);
 		this.iterationDuration = 10; /** seconds */
 		this.elapsedTime = 0; /** seconds */
 
-		setInterval(() => {
+		this.interateInterval = setInterval(() => {
 			this.iterateCells();
 		}, this.iterationDuration * 1000);
 
-		console.log(this);
 	}
 
 	/**
@@ -49,6 +54,7 @@ export class ExNihilo {
 	{
 		this.cells.forEach(i => {
 			i.forEach(j => {
+
 				j.iterate();
 			});
 		});
@@ -65,8 +71,7 @@ export class ExNihilo {
 	/** From server */
 	/** @param action : 'action1', 'action2', etc. */
 
-	getAction(action, player, x, y)
-	{
+	getAction(action, player, x, y) {
 		if (action === 'iterateCells')
 			this.iterateCells()
 		else
@@ -78,14 +83,14 @@ export class ExNihilo {
 	 */
 
 	checkFinalState() {
-		return false;
+		this.finalStateRule.checkState();
+
 	}
 
 	/** To server */
 	/** @param action : 'action1', 'action2', etc. */
 
-	doAction(action, x, y)
-	{
+	doAction(action, x, y) {
 		this.getAction(action, this.player, x, y); /** TODO : to Delete finally */
 		/** To server : */
 		/** Send action */
