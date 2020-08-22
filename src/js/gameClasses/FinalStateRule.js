@@ -4,7 +4,7 @@ export default class FinalStateRule {
     }
 
     checkState() {
-        if (this.exNihilo.elapsedTime >= 5) {
+        if (this.exNihilo.elapsedTime >= 5000) {
             console.log('clear  ', clearInterval(this.exNihilo.interateInterval));
 
             this.exNihilo.cells.map(i => i.map(j => {

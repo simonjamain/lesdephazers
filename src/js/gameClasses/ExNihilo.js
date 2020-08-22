@@ -37,7 +37,7 @@ export class ExNihilo {
 		];
 		this.munitionMaxDefault = 5;
 		this.finalStateRule = new FinalStateRule(this);
-		this.iterationDuration = 10; /** seconds */
+		this.iterationDuration = 5; /** seconds */
 		this.elapsedTime = 0; /** seconds */
 
 		this.interateInterval = setInterval(() => {
