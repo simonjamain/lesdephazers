@@ -1,8 +1,5 @@
 import { Scene } from 'phaser';
 
-import '../../assets/fonts/font.png';
-import '../../assets/fonts/font.xml';
-
 export default class GameOverScene extends Scene {
 	constructor() {
 		super({ key: 'gameOverScene' });

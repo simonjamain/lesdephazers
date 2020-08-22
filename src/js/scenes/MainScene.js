@@ -10,13 +10,11 @@ export default class MainScene extends Scene {
 
 	init(data) {
 		this.exNihilo = new ExNihilo();
-		document.exNihilo = this.exNihilo;
 		this.exNihilo.init({
 			scene: this,
 			w: gameSettings.grid.nbCol,
 			h: gameSettings.grid.nbRow
 		});
-		console.log('saperlipopette');
 		this.input.mouse.disableContextMenu();
 	}
 
