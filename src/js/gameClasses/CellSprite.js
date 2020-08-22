@@ -1,28 +1,30 @@
 import { Scene, Input, GameObjects } from 'phaser';
 
 class CellSprite extends GameObjects.Rectangle {
-	constructor(exNihilo, scene, cell, x, y, side, color) {
-		super(scene, x, y, side, side);
+	constructor(cell) {
+		super(cell.scene, cell.x, cell.y, cell.side, cell.side);
 
-		this.color = color !== null ? color : 0xffffff;
-		console.log('color', this.color)
-		this.setFillStyle(this.color, 1);
-		this.setStrokeStyle(1, 0x000000);
+		this.cell = cell;
+
 		this.setInteractive({ useHandCursor: true });
-		scene.add.existing(this);
+		cell.scene.add.existing(this);
+
+		this.init();
 
 		this.on('pointerdown', (pointer) => {
 			if (pointer.rightButtonDown()) {
-				this.setFillStyle(0xff00ff, 1);
+				this.cell.exNihilo.doAction('action2', this.cell.player, this.cell.row, this.cell.col);
 			}
 			else if (pointer.leftButtonDown()) {
-				this.setFillStyle(0x0000ff, 1);
+				this.cell.exNihilo.doAction('action1', this.cell.player, this.cell.row, this.cell.col);
 			}
 		}, this);
-
 	}
 
-
+	init = () => {
+		this.setFillStyle(this.cell.color, 1);
+		this.setStrokeStyle(1, 0x000000);
+	}
 
 
 }
