@@ -6,7 +6,7 @@
 		"browserSync": "browser-sync start --server dist --files dist --cors",
 		"live": "npm-run-all -p watch browserSync",
 		"watch": "npm-watch",
-		"devParcel": "parcel build src/index.html --out-dir ./dist",
+		"devParcel": "parcel build src/index.html --no-minify --out-dir ./dist",
 		"buildParcel": "parcel build --no-source-maps src/index.html --out-dir ./dist",
 		"dev": "npm-run-all del devParcel",
 		"build": "npm-run-all del buildParcel",
