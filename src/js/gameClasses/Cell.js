@@ -22,6 +22,7 @@ export default class Cell {
 		this.action2 = action2;
 
 		this.player = null;
+		this.futurPlayer = null;
 		this.color = this.player?.color ? this.player.color : 0xffffff;
 
 		this.cellSprite = new CellSprite(this);

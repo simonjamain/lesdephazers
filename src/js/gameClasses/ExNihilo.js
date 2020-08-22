@@ -3,12 +3,16 @@ import Player from './Player';
 import Cell from './Cell';
 import CellIterationRule from './CellIterationRule';
 import CellActionRule from './CellActionRule';
+/** import CellActionRule from ./CellActionRule */
+import MultiplayerServer from "./MultiplayerServer"
+import Action from './Action';
 import FinalStateRule from './FinalStateRule';
 
 export class ExNihilo {
 	timeElapsed = 0;
 
 	init({ scene, w, h }) {
+		this.multiplayerServer = new MultiplayerServer(this, "http://vps.simonjamain.fr:3000")//Note : this has to be set early
 		this.cellActionRule = new CellActionRule(this);
 		this.cellIterationRule = new CellIterationRule(this);
 
@@ -26,18 +30,17 @@ export class ExNihilo {
 					this.cellIterationRule[gameSettings.rule]
 				);
 		}
+		console.log(this.cells)
 
 		this.scene = scene;
 		this.nbActionOnStartupDefault = 2;
-		this.player = new Player(this, 0xff0000);
-		this.playerFake = new Player(this, 0x00ff00);
-		this.players = [
-			this.player,
-			this.playerFake
-		];
+		this.player = { color: Math.round(Math.random() * 0xffffff )};
+		this.multiplayerServer.sendNewPlayer(this.player.color)
+		this.players = [];
+		
 		this.munitionMaxDefault = 5;
 		this.finalStateRule = new FinalStateRule(this);
-		this.iterationDuration = 10; /** seconds */
+		this.iterationDuration = 5; /** seconds */
 		this.elapsedTime = 0; /** seconds */
 
 		this.interateInterval = setInterval(() => {
@@ -50,26 +53,30 @@ export class ExNihilo {
 	 * Action from server - START
 	 */
 
-	iterateCells() {
-		this.cells = this.cells.map(i => {
-			i.map(j => {
+	iterateCells()
+	{
+		this.cells.forEach(i => {
+			i.forEach(j => {
+
 				j.iterate();
-				// console.log(j);
-				return j;
 			});
-			return i;
+		});
+		this.cells.forEach(col => {
+			col.forEach(row => {
+				row.player = row.futurPlayer;
+				row.futurPlayer = null;
+				row.setPlayer(row.player);
+			})
 		});
 		this.checkFinalState();
 	}
 
 	/** From server */
-	/** @param action : 'action1', 'action2', etc. */
-
-	getAction(action, player, x, y) {
-		if (action === 'iterateCells')
-			this.iterateCells()
-		else
-			this.cells[y][x][action](player, this.cells[y][x]);
+	/** @param action.action : 'action1', 'action2', etc. */
+	getAction(action) {
+		console.log(action)
+		console.log(this)
+		this.cells[action.i][action.j][action.action](this.findPlayer(action.playerColor), this.cells[action.i][action.j]);
 	}
 
 	/**
@@ -83,12 +90,28 @@ export class ExNihilo {
 
 	/** To server */
 	/** @param action : 'action1', 'action2', etc. */
-
-	doAction(action, x, y) {
-		this.getAction(action, this.player, x, y); /** TODO : to Delete finally */
+	doAction(action, i, j) {
+		this.multiplayerServer.sendNewAction(
+			new Action(action, this.player, i, j)
+		)
 		/** To server : */
 		/** Send action */
 		/** Send this.player */
+	}
+
+	addPlayer(player) {
+		this.players.push(player)
+	}
+
+	findPlayer(playerColor) {
+
+		let playerFound = null;
+		for (const player of this.players) {
+			if(player.color === playerColor){
+				playerFound = player;
+			}
+		}
+		return playerFound;
 	}
 
 	find(cell) {
