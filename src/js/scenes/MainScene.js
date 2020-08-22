@@ -9,8 +9,9 @@ export default class MainScene extends Scene {
 	}
 
 	init(data) {
-		const exNihilo = new ExNihilo();
-		exNihilo.init({
+		this.exNihilo = new ExNihilo();
+		document.exNihilo = this.exNihilo;
+		this.exNihilo.init({
 			scene: this,
 			w: gameSettings.grid.nbCol,
 			h: gameSettings.grid.nbRow
@@ -27,7 +28,7 @@ export default class MainScene extends Scene {
 	}
 
 	update(time, delta) {
-
+		this.exNihilo.elapsedTime = Math.floor(time / 1000);
 	}
 }
 

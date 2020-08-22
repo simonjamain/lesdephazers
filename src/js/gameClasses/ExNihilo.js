@@ -1,13 +1,17 @@
 import { gameSettings } from '../config';
 import Cell from './Cell';
-/** import Player from './Player'; */
+import Player from './Player';
 // import CellIterationRule from './CellIterationRule';
 /** import FinalStateRule from './FinalStateRule'; */
 import CellActionRule from './CellActionRule';
+import FinalStateRule from './FinalStateRule';
 
 export class ExNihilo {
+	timeElapsed = 0;
+
 	init({ scene, w, h }) {
 		this.cellActionRule = new CellActionRule(this);
+		this.finalStateRule = new FinalStateRule(this);
 
 		this.cells = [];
 		for (let i = 0; i < w; i++) {
@@ -23,12 +27,15 @@ export class ExNihilo {
 				);
 		}
 
+		this.scene = scene;
 		this.nbActionOnStartupDefault = 2;
-		this.player = { color: 0xff0000 };
-		this.playerFake = { color: 0x00ff00 };
-		this.players = [];
+		this.player = new Player(this, 0xff0000);
+		this.playerFake = new Player(this, 0x00ff00);
+		this.players = [
+			this.player,
+			this.playerFake
+		];
 		this.munitionMaxDefault = 5;
-		this.finalStateRule = 'finalStateRule';
 		this.iterationDuration = 30; /** seconds */
 		this.elapsedTime = 0; /** seconds */
 	}
@@ -60,7 +67,8 @@ export class ExNihilo {
 	 */
 
 	checkFinalState() {
-		return false;
+		this.finalStateRule.checkState();
+
 	}
 
 	/** To server */
