@@ -8,11 +8,12 @@ export default class CellActionRule
     convert(player, cell, force = false)
     {
         if (force || !this.player)
-            cell.player = player;
+            cell.setPlayer(player);
     }
 
-    neutralize()
+    neutralize(player, cell, force = false)
     {
-        this.player = null;
+        if (force || cell.player && cell.player.color != player.color)
+            cell.setPlayer(null);
     }
 }

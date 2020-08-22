@@ -1,17 +1,20 @@
 import { gameSettings } from '../config';
+import Player from './Player';
 import Cell from './Cell';
-/** import Player from './Player'; */
-// import CellIterationRule from './CellIterationRule';
-/** import FinalStateRule from './FinalStateRule'; */
+import CellIterationRule from './CellIterationRule';
 import CellActionRule from './CellActionRule';
 /** import CellActionRule from ./CellActionRule */
 import MultiplayerServer from "./MultiplayerServer"
 import Action from './Action';
+import FinalStateRule from './FinalStateRule';
 
 export class ExNihilo {
+	timeElapsed = 0;
+
 	init({ scene, w, h }) {
 		this.multiplayerServer = new MultiplayerServer(this, "http://vps.simonjamain.fr:3000")//Note : this has to be set early
 		this.cellActionRule = new CellActionRule(this);
+		this.cellIterationRule = new CellIterationRule(this);
 
 		this.cells = [];
 		for (let i = 0; i < w; i++) {
@@ -23,20 +26,26 @@ export class ExNihilo {
 					j,
 					i,
 					this.cellActionRule[gameSettings.actions.action1],
-					this.cellActionRule[gameSettings.actions.action2]
+					this.cellActionRule[gameSettings.actions.action2],
+					this.cellIterationRule[gameSettings.rule]
 				);
 		}
 		console.log(this.cells)
 
+		this.scene = scene;
 		this.nbActionOnStartupDefault = 2;
 		this.player = { color: Math.round(Math.random() * 0xffffff )};
 		this.multiplayerServer.sendNewPlayer(this.player.color)
 		this.players = [];
 		
 		this.munitionMaxDefault = 5;
-		this.finalStateRule = 'finalStateRule';
-		this.iterationDuration = 30; /** seconds */
+		this.finalStateRule = new FinalStateRule(this);
+		this.iterationDuration = 10; /** seconds */
 		this.elapsedTime = 0; /** seconds */
+
+		this.interateInterval = setInterval(() => {
+			this.iterateCells();
+		}, this.iterationDuration * 1000);
 
 	}
 
@@ -44,11 +53,20 @@ export class ExNihilo {
 	 * Action from server - START
 	 */
 
-	iterateCells() {
-		this.cells = this.cells.map(i => {
-			i.map(j => {
-				j.ierate();
+	iterateCells()
+	{
+		this.cells.forEach(i => {
+			i.forEach(j => {
+
+				j.iterate();
 			});
+		});
+		this.cells.forEach(col => {
+			col.forEach(row => {
+				row.player = row.futurPlayer;
+				row.futurPlayer = null;
+				row.setPlayer(row.player);
+			})
 		});
 		this.checkFinalState();
 	}
@@ -66,7 +84,8 @@ export class ExNihilo {
 	 */
 
 	checkFinalState() {
-		return false;
+		this.finalStateRule.checkState();
+
 	}
 
 	/** To server */

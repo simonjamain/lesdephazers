@@ -16,7 +16,6 @@ export default class MainScene extends Scene {
 			w: gameSettings.grid.nbCol,
 			h: gameSettings.grid.nbRow
 		});
-		console.log('saperlipopette');
 		this.input.mouse.disableContextMenu();
 	}
 
@@ -28,7 +27,7 @@ export default class MainScene extends Scene {
 	}
 
 	update(time, delta) {
-
+		this.exNihilo.elapsedTime = Math.floor(time / 1000);
 	}
 }
 
