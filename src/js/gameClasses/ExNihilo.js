@@ -69,14 +69,13 @@ export class ExNihilo {
 			})
 		});
 		this.checkFinalState();
+		console.log("iteration");
 	}
 
 	/** From server */
 	/** @param action.action : 'action1', 'action2', etc. */
 	getAction(action) {
-		console.log(action)
-		console.log(this)
-		this.cells[action.i][action.j][action.action](this.findPlayer(action.playerColor), this.cells[action.i][action.j]);
+		this.cells[action.j][action.i][action.action](this.findPlayer(action.playerColor), this.cells[action.j][action.i]);
 	}
 
 	/**
