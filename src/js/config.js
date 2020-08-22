@@ -1,30 +1,30 @@
 import { AUTO } from 'phaser';
-import main from './scenes/main';
+
 
 const DEFAULT_HEIGHT = window.innerHeight;
 const DEFAULT_WIDTH = window.innerWidth;
 
 const config = {
-	type: AUTO,
-	width: DEFAULT_WIDTH,
-	height: DEFAULT_HEIGHT,
+    type: AUTO,
+    width: DEFAULT_WIDTH,
+    height: DEFAULT_HEIGHT,
     pixelArt: true,
-	transparent: false,
-	antialias: false,
-	pixelArt: true,
-	failIfMajorPerformanceCaveat: true,
-	physics: {
-		default: 'arcade',
-		arcade: {
-			gravity: { y: 200 }
-		}
-	},
+    transparent: false,
+    antialias: false,
+    pixelArt: true,
+    failIfMajorPerformanceCaveat: true,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 200 }
+        }
+    },
     fps: {
         target: 25,
         min: 25,
         forceSetTimeOut: true
     },
-	canvas: document.querySelector('canvas')
+    canvas: document.querySelector('canvas')
 };
 
 const gameSettings = {

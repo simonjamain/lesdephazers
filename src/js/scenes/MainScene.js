@@ -2,7 +2,7 @@ import { Scene, Input } from 'phaser';
 
 
 export default class MainScene extends Scene {
-	constructor({ key }) {
+	constructor() {
 		super({ key: 'mainScene' });
 
 	}
