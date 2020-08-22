@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
-		"browserSync": "browser-sync start --server dist --files dist",
+		"browserSync": "browser-sync start --server dist --files dist --cors",
 		"live": "npm-run-all -p watch browserSync",
 		"watch": "npm-watch",
 		"devParcel": "parcel build src/index.html --out-dir ./dist",

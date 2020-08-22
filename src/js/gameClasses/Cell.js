@@ -2,11 +2,11 @@
 import CellSprite from './CellSprite';
 
 export default class Cell {
-	constructor(exNihilo, scene, action1, action2) {
+	constructor(exNihilo, scene, x, y, action1, action2) {
 
 		this.exNihilo = exNihilo;
-		// this.x = x;
-		// this.y = y;
+		this.x = x;
+		this.y = y;
 		this.action1 = action1;
 		this.action2 = action2;
 
@@ -15,9 +15,9 @@ export default class Cell {
 		this.cellSprite = new CellSprite(scene, this, x, y, this.player?.color);
 	}
 
-	iterate = () => {
+	// exNihilo.doAction(action);
 
-	}
+
 
 
 }

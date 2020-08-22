@@ -27,6 +27,10 @@ const config = {
 };
 
 const gameSettings = {
+    grid: {
+        nbCell: 10,
+        cellSide: 50,
+    },
     player: {
         speedX: 100,
         speedY: 70,

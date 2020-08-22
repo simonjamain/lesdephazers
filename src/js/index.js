@@ -15,4 +15,4 @@ const gameConfig = {
 
 const game = new Game(gameConfig);
 
-
+console.log('game.scenes', game.scenes)
