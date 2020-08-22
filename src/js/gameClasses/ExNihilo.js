@@ -7,6 +7,7 @@ import CellActionRule from './CellActionRule';
 import MultiplayerServer from "./MultiplayerServer"
 import Action from './Action';
 import FinalStateRule from './FinalStateRule';
+import InfosBoard from './InfosBoard';
 
 export class ExNihilo {
 	timeElapsed = 0;
@@ -34,14 +35,14 @@ export class ExNihilo {
 
 		this.scene = scene;
 		this.nbActionOnStartupDefault = 2;
-		this.player = { color: Math.round(Math.random() * 0xffffff )};
+		this.player = { color: Math.round(Math.random() * 0xffffff) };
 		this.multiplayerServer.sendNewPlayer(this.player.color)
 		this.players = [];
-		
+
 		this.munitionMaxDefault = 5;
 		this.finalStateRule = new FinalStateRule(this);
-		this.iterationDuration = 5; /** seconds */
 		this.elapsedTime = 0; /** seconds */
+		this.infosBoard = new InfosBoard(this);
 
 		this.interateInterval = setInterval(() => {
 			this.iterateCells();
@@ -53,8 +54,10 @@ export class ExNihilo {
 	 * Action from server - START
 	 */
 
-	iterateCells()
-	{
+	iterateCells(iterationDuration) {
+		this.iterationDuration = iterationDuration;
+		this.infosBoard.updateGenerationBar(this.iterationDuration);
+
 		this.cells.forEach(i => {
 			i.forEach(j => {
 
@@ -107,7 +110,7 @@ export class ExNihilo {
 
 		let playerFound = null;
 		for (const player of this.players) {
-			if(player.color === playerColor){
+			if (player.color === playerColor) {
 				playerFound = player;
 			}
 		}

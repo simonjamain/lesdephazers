@@ -28,6 +28,7 @@ export default class MainScene extends Scene {
 
 	update(time, delta) {
 		this.exNihilo.elapsedTime = Math.floor(time / 1000);
+		this.exNihilo.infosBoard.updateTime();
 	}
 }
 

@@ -36,9 +36,15 @@ export default class Cell {
 	}
 
 	getCoord() {
+
+		const gridHalfSizeX = gameSettings.grid.nbCol * this.side / 2;
+		const gridHalfSizeY = gameSettings.grid.nbRow * this.side / 2;
+		const offSetX = window.innerWidth / 2 - gridHalfSizeX;
+		const offSetY = window.innerHeight / 2 - gridHalfSizeY;
+
 		return {
-			x: this.row * this.side + this.side / 2,
-			y: this.col * this.side + this.side / 2,
+			x: this.row * this.side + this.side / 2 + offSetX,
+			y: this.col * this.side + this.side / 2 + offSetY,
 		};
 	}
 	// exNihilo.doAction(action);

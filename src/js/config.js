@@ -48,7 +48,7 @@ const gameSettings = {
             grey: 20,
         },
         board: {
-            height: 50,
+            height: 70,
             color: 0x121212,
         },
         text: {
