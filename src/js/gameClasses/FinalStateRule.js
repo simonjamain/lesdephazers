@@ -1,4 +1,4 @@
-class FinalStateRule
+export default class FinalStateRule
 {
     constructor(exNihilo)
     {

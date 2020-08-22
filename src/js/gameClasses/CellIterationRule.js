@@ -1,4 +1,4 @@
-class CellIterationRule
+export default class CellIterationRule
 {
     constructor(exNihilo)
     {

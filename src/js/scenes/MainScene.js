@@ -1,6 +1,6 @@
 import { Scene, Input } from 'phaser';
-import Cell from '../gameClasses/Cell';
-
+import { ExNihilo } from '../gameClasses/ExNihilo';
+import { gameSettings, config } from '../config';
 
 export default class MainScene extends Scene {
 	constructor() {
@@ -9,6 +9,12 @@ export default class MainScene extends Scene {
 	}
 
 	init(data) {
+		const exNihilo = new ExNihilo();
+		exNihilo.init({
+			scene: this,
+			w: gameSettings.grid.nbCell,
+			h: gameSettings.grid.nbCell
+		});
 		console.log('saperlipopette');
 		this.input.mouse.disableContextMenu();
 	}

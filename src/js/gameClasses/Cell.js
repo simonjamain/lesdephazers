@@ -27,8 +27,4 @@ export default class Cell {
 		};
 	}
 	// exNihilo.doAction(action);
-
-
-
-
 }

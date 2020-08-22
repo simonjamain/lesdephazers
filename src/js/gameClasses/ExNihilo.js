@@ -1,22 +1,34 @@
-/** import Cell from ./Cell */
-/** import Player from ./Player */
-/** import CellIterationRule from ./CellIterationRule */
-/** import FinalStateRule from ./FinalStateRule */
-/** import CellActionRule from ./CellActionRule */
+import { gameSettings } from '../config';
+import Cell from './Cell';
+/** import Player from './Player'; */
+// import CellIterationRule from './CellIterationRule';
+/** import FinalStateRule from './FinalStateRule'; */
+import CellActionRule from './CellActionRule';
 
 export class ExNihilo
 {
-	init(w, h)
+	init({scene, w, h})
 	{
-		this.cells = [];
-		this.nbActionOnStartupDefault = 2;
+		this.cellActionRule = new CellActionRule(this);
 
+		this.cells = [];
 		for (let i = 0; i < w; i++)
 		{
 			this.cells[i] = [];
 			for (let j = 0; j < h; j ++)
-				this.cells[i][j] = 'cell';
+				this.cells[i][j] = new Cell(
+					this,
+					scene,
+					j,
+					i,
+					this.cellActionRule[gameSettings.actions.action1],
+					this.cellActionRule[gameSettings.actions.action2]
+				);
 		}
+
+		this.nbActionOnStartupDefault = 2;
+		this.player = {color: 0xff0000};
+		this.playerFake = {color: 0x00ff00};
 		this.players = [];
 		this.munitionMaxDefault = 5;
 		this.finalStateRule = 'finalStateRule';
@@ -26,10 +38,9 @@ export class ExNihilo
 		console.log(this);
 	}
 
-	find(cell)
-	{
-		return {x: cell.x, y: cell.y};
-	}
+	/**
+	 * Action from server - START
+	 */
 
 	iterateCells()
 	{
@@ -38,10 +49,35 @@ export class ExNihilo
 				j.ierate();
 			});
 		});
+		this.checkFinalState();
 	}
+
+	getAction(action, player, x, y)
+	{
+		if (action === 'iterateCells')
+			this.iterateCells()
+		else
+			this.cells[y][x][action](player, this.cells[y][x]);
+	}
+
+	/**
+	 * Action from server - END
+	 */
 
 	checkFinalState()
 	{
 		return false;
+	}
+
+	doAction(action, player, x, y)
+	{
+		/** To server : */
+		/** Send action */
+		/** Send this.player */
+	}
+
+	find(cell)
+	{
+		return {x: cell.x, y: cell.y};
 	}
 }
