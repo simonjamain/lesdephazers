@@ -31,7 +31,6 @@ export class ExNihilo {
 					this.cellIterationRule[gameSettings.rule]
 				);
 		}
-		// console.log(this.cells)
 
 		this.scene = scene;
 		this.nbActionOnStartupDefault = 2;
@@ -44,10 +43,6 @@ export class ExNihilo {
 		this.finalStateRule = new FinalStateRule(this);
 		this.elapsedTime = 0; /** seconds */
 		this.infosBoard = new InfosBoard(this);
-
-		this.interateInterval = setInterval(() => {
-			this.iterateCells();
-		}, this.iterationDuration * 1000);
 
 	}
 
@@ -74,15 +69,11 @@ export class ExNihilo {
 			})
 		});
 		this.checkFinalState();
-		// console.log("iteration");
 	}
 
 	/** From server */
 	/** @param action.action : 'action1', 'action2', etc. */
 	getAction(action) {
-		// console.log(action.playerColor)
-		// console.log(this.findPlayer(action.playerColor))
-
 		this.cells[action.j][action.i][action.action](this.findPlayer(action.playerColor), this.cells[action.j][action.i]);
 	}
 
