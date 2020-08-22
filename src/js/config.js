@@ -18,19 +18,19 @@ const config = {
             gravity: { y: 200 }
         }
     },
-    fps: {
-        target: 25,
-        min: 25,
-        forceSetTimeOut: true
-    },
+    // fps: {
+    //     target: 25,
+    //     min: 25,
+    //     forceSetTimeOut: true
+    // },
     canvas: document.querySelector('canvas')
 };
 
 const gameSettings = {
     grid: {
-        nbCol: 10,
-        nbRow: 10,
-        cellSide: 50,
+        nbCol: 40,
+        nbRow: 40,
+        cellSide: 17,
     },
     actions: {
         action1: 'convert',

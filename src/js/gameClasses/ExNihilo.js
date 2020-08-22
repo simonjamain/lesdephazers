@@ -43,6 +43,7 @@ export class ExNihilo {
 		this.finalStateRule = new FinalStateRule(this);
 		this.elapsedTime = 0; /** seconds */
 		this.infosBoard = new InfosBoard(this);
+		this.gameEnd = false;
 
 	}
 
@@ -52,8 +53,7 @@ export class ExNihilo {
 
 	iterateCells(iterationDuration) {
 		this.iterationDuration = iterationDuration;
-		// console.log('this.iterationDuration', this.iterationDuration)
-		// this.infosBoard.updateGenerationBar(this.iterationDuration);
+		this.infosBoard.updateGenerationBar(this.iterationDuration);
 
 		this.cells.forEach(i => {
 			i.forEach(j => {

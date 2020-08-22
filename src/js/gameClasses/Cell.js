@@ -40,7 +40,7 @@ export default class Cell {
 		const gridHalfSizeX = gameSettings.grid.nbCol * this.side / 2;
 		const gridHalfSizeY = gameSettings.grid.nbRow * this.side / 2;
 		const offSetX = window.innerWidth / 2 - gridHalfSizeX;
-		const offSetY = window.innerHeight / 2 - gridHalfSizeY;
+		const offSetY = (window.innerHeight - gameSettings.score.board.height) / 2 - gridHalfSizeY + gameSettings.score.board.height;
 
 		return {
 			x: this.row * this.side + this.side / 2 + offSetX,
