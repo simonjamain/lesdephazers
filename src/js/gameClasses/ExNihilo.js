@@ -18,8 +18,8 @@ export class ExNihilo
 				this.cells[i][j] = new Cell(this, scene,j, i, 'convertCell', 'action2');
 		}
 		
-		this.player = '#ff0000';
-		this.playerFake = '#00ff00';
+		this.player = {color: '#ff0000'};
+		this.playerFake = {color: '#00ff00'};
 		this.players = [];
 		this.munitionMaxDefault = 5;
 		this.finalStateRule = 'finalStateRule';
