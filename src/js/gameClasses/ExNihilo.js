@@ -37,7 +37,8 @@ export class ExNihilo {
 		this.player = { color: Math.round(Math.random() * 0xffffff )};
 		this.multiplayerServer.sendNewPlayer(this.player.color)
 		this.players = [];
-		
+		this.players.push(this.player)
+
 		this.munitionMaxDefault = 5;
 		this.finalStateRule = new FinalStateRule(this);
 		this.iterationDuration = 5; /** seconds */
@@ -75,6 +76,9 @@ export class ExNihilo {
 	/** From server */
 	/** @param action.action : 'action1', 'action2', etc. */
 	getAction(action) {
+		console.log(action.playerColor)
+		console.log(this.findPlayer(action.playerColor))
+
 		this.cells[action.j][action.i][action.action](this.findPlayer(action.playerColor), this.cells[action.j][action.i]);
 	}
 
