@@ -52,6 +52,8 @@ export class ExNihilo
 		this.checkFinalState();
 	}
 
+	/** From server */
+	/** @param action : 'action1', 'action2', etc. */
 	getAction(action, player, x, y)
 	{
 		if (action === 'iterateCells')
@@ -69,6 +71,8 @@ export class ExNihilo
 		return false;
 	}
 
+	/** To server */
+	/** @param action : 'action1', 'action2', etc. */
 	doAction(action, player, x, y)
 	{
 		/** To server : */
