@@ -20,8 +20,19 @@ class MultiplayerServer
             this.exNihilo.getAction(action)
         });
 
-        this.socket.on('iterate', () => {
-            this.exNihilo.iterateCells();
+        
+        this.socket.on('allPlayers', (playerColors) => {
+            this.exNihilo.players = []
+            for (const playerColor of playerColors) {
+                this.exNihilo.addPlayer(
+                    new Player(this.exNihilo, playerColor)
+                    )
+                
+            }
+        });
+
+        this.socket.on('iterate', (iterationDuration) => {
+            this.exNihilo.iterateCells(iterationDuration);
         });
 
         this.socket.on('disconnect', () => {
