@@ -1,6 +1,6 @@
 import { Scene, Input } from 'phaser';
 import { ExNihilo } from '../gameClasses/ExNihilo';
-
+import { gameSettings, config } from '../config';
 
 export default class MainScene extends Scene {
 	constructor() {
@@ -12,8 +12,8 @@ export default class MainScene extends Scene {
 			const exNihilo = new ExNihilo();
 				exNihilo.init({
 				scene: this,
-				w:10,
-				h:10
+				w:gameSettings.grid.nbCell,
+				h:gameSettings.grid.nbCell
 			});
 		console.log('saperlipopette');
 	}

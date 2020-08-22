@@ -15,8 +15,11 @@ export class ExNihilo
 		{
 			this.cells[i] = [];
 			for (let j = 0; j < h; j ++)
-				this.cells[i][j] = new Cell(this, scene, 'action1', 'action2');
+				this.cells[i][j] = new Cell(this, scene,j, i, 'convertCell', 'action2');
 		}
+		
+		this.player = '#ff0000';
+		this.playerFake = '#00ff00';
 		this.players = [];
 		this.munitionMaxDefault = 5;
 		this.finalStateRule = 'finalStateRule';
@@ -26,10 +29,9 @@ export class ExNihilo
 		console.log(this);
 	}
 
-	find(cell)
-	{
-		return {x: cell.x, y: cell.y};
-	}
+	/**
+	 * Action from server - START
+	 */
 
 	iterateCells()
 	{
@@ -38,10 +40,37 @@ export class ExNihilo
 				j.ierate();
 			});
 		});
+		this.checkFinalState();
 	}
+
+	convertCell(player, x, y)
+	{
+		this.cells[y][x].convert(player);
+	}
+
+	neutralizeCell(x, y)
+	{
+		this.cells[y][x].neutralize();
+	}
+
+	/**
+	 * Action from server - END
+	 */
 
 	checkFinalState()
 	{
 		return false;
+	}
+
+	doAction()
+	{
+		/** To server : */
+		/** Send action */
+		/** Send this.player */
+	}
+
+	find(cell)
+	{
+		return {x: cell.x, y: cell.y};
 	}
 }
