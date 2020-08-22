@@ -12,10 +12,10 @@ export default class CellIterationRule
         if (typeof(this.exNihilo.cells[cell.col - 1]) !== 'undefined' &&
             this.exNihilo.cells[cell.col - 1][cell.row].player !== null)
             {
-                counter[0] = {
+                counter.push({
                     player: this.exNihilo.cells[cell.col - 1][cell.row].player,
                     count: 1
-                };
+                });
             }
         
         if (typeof(this.exNihilo.cells[cell.col][cell.row + 1]) !== 'undefined' &&
@@ -25,10 +25,10 @@ export default class CellIterationRule
                     if (m.player.color === this.exNihilo.cells[cell.col][cell.row + 1].player.color)
                         m.count += 1;
                     else
-                        counter[1] = {
+                        counter.push({
                             player: this.exNihilo.cells[cell.col][cell.row + 1].player,
                             count: 1
-                        };
+                        });
                 })
             }
 
@@ -39,10 +39,10 @@ export default class CellIterationRule
                     if (m.player.color === this.exNihilo.cells[cell.col + 1][cell.row].player.color)
                         m.count += 1
                     else
-                        counter[2] = {
+                        counter.push({
                             player: this.exNihilo.cells[cell.col + 1][cell.row].player,
                             count: 1
-                        };
+                        });
                 })
             }
 
@@ -53,26 +53,27 @@ export default class CellIterationRule
                     if (m.player.color === this.exNihilo.cells[cell.col][cell.row - 1].player.color)
                         m.count += 1;
                     else
-                    counter[3] = {
+                    counter.push({
                         player: this.exNihilo.cells[cell.col][cell.row - 1].player,
                         count: 1
-                    };
+                    });
                 })
             }
 
-        if (counter.length > 0)
-            console.log(counter);
         if(counter.length > 0)
             counter.map(m => {
                 if (cell.futurPlayer === null)
                 {
-                    if (cell.player === null && m.count >= 3)
-                        cell.futurPlayer = m.player; //cell.setPlayer(m.player);
+                    if ((cell.player === null && m.count >= 3) || (cell.player !== null && m.count >= 2))
+                    {
+                        console.log(m.count);
+                        cell.futurPlayer = m.player;
+                    }
                     if (cell.player !== null && m.count <= 1)
-                        cell.futurPlayer = null; //cell.setPlayer(null);
+                        cell.futurPlayer = null;
                 }
             });
         else
-            cell.futurPlayer = null; //cell.setPlayer(null);
+            cell.futurPlayer = null;
     }
 }
