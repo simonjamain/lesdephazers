@@ -10,8 +10,6 @@ export default class Cell {
 		this.col = col;
 		this.row = row;
 
-		this.gridNbCol = gameSettings.grid.nbCol;
-		this.gridNbRow = gameSettings.grid.nbRow;
 		this.side = gameSettings.grid.cellSide;
 
 		this.action1 = action1;
