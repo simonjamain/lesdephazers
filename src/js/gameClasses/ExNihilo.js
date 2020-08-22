@@ -57,7 +57,7 @@ export class ExNihilo {
 
 	iterateCells(iterationDuration) {
 		this.iterationDuration = iterationDuration;
-		console.log('this.iterationDuration', this.iterationDuration)
+		// console.log('this.iterationDuration', this.iterationDuration)
 		// this.infosBoard.updateGenerationBar(this.iterationDuration);
 
 		this.cells.forEach(i => {
