@@ -1,6 +1,5 @@
 import { AUTO } from 'phaser';
 
-
 const DEFAULT_HEIGHT = window.innerHeight;
 const DEFAULT_WIDTH = window.innerWidth;
 
