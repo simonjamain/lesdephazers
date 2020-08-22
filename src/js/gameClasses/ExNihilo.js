@@ -69,7 +69,7 @@ export class ExNihilo
 		return false;
 	}
 
-	doAction()
+	doAction(action, player, x, y)
 	{
 		/** To server : */
 		/** Send action */
