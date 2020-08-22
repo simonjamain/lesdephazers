@@ -34,7 +34,7 @@ const gameSettings = {
     },
     actions: {
         action1: 'convert',
-        action2: 'neutralize'
+        action2: 'neutralizeAll'
     },
     rule: 'basic',
     player: {
