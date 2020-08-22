@@ -26,12 +26,11 @@ export default class Cell {
 
 		this.cellSprite = new CellSprite(this);
 		this.rule = rule;
-		this.cellSprite = new CellSprite(this.exNihilo, scene, this, this.getCoord().x, this.getCoord().y, this.side, this.player?.color ? this.player.color : null);
 	}
 
 	setPlayer = (player) => {
 		this.player = player;
-		this.color = this.player?.color ? this.player.color : 0xffffff;
+		this.color = this.player?.color && this.player !== null ? this.player.color : 0xffffff;
 		this.cellSprite.init(this);
 	}
 
