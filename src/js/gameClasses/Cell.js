@@ -18,15 +18,4 @@ export default class Cell {
 	}
 
 	// exNihilo.doAction(action);
-
-	convert(player, force = false)
-	{
-		if (force || !this.player)
-			this.player = player;
-	}
-
-	neutralize()
-	{
-		this.player = null;
-	}
 }

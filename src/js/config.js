@@ -31,6 +31,10 @@ const gameSettings = {
         nbCell: 10,
         cellSide: 50,
     },
+    actions: {
+        action1: 'convert',
+        action2: 'neutralize'
+    },
     player: {
         speedX: 100,
         speedY: 70,
