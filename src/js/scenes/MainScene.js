@@ -9,9 +9,9 @@ export default class MainScene extends Scene {
 	}
 
 	init(data) {
-		const exNihilo = new ExNihilo();
-		document.exNihilo = exNihilo;
-		exNihilo.init({
+		this.exNihilo = new ExNihilo();
+		document.exNihilo = this.exNihilo;
+		this.exNihilo.init({
 			scene: this,
 			w: gameSettings.grid.nbCol,
 			h: gameSettings.grid.nbRow
