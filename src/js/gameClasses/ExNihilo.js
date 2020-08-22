@@ -43,10 +43,6 @@ export class ExNihilo {
 		this.iterationDuration = 5; /** seconds */
 		this.elapsedTime = 0; /** seconds */
 
-		this.interateInterval = setInterval(() => {
-			this.iterateCells();
-		}, this.iterationDuration * 1000);
-
 	}
 
 	/**
