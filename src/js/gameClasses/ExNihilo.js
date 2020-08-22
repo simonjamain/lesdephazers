@@ -3,6 +3,7 @@
 /** import CellIterationRule from ./CellIterationRule */
 /** import FinalStateRule from ./FinalStateRule */
 /** import CellActionRule from ./CellActionRule */
+import MultiplayerServer from "./MultiplayerServer"
 
 export class ExNihilo
 {
@@ -22,6 +23,8 @@ export class ExNihilo
 		this.finalStateRule = 'finalStateRule';
 		this.iterationDuration = 30; /** seconds */
 		this.elapsedTime = 0; /** seconds */
+
+		this.multiplayerServer = new MultiplayerServer(this, "http://vps.simonjamain.fr:3000")
 
 		console.log(this);
 	}
