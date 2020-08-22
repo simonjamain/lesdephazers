@@ -1,16 +1,31 @@
 import { Scene, Input, GameObjects } from 'phaser';
 
-class CellSprite extends GameObjects.Sprite {
-	constructor(scene, cell, x, y, color, scale = 1) {
+class CellSprite extends GameObjects.Rectangle {
+	constructor(cell) {
+		super(cell.scene, cell.x, cell.y, cell.side, cell.side);
 
-		super(scene, x, y);
+		this.cell = cell;
 
-		this.color = color !== null ? color : '#fff'
+		this.setInteractive({ useHandCursor: true });
+		cell.scene.add.existing(this);
 
-		this.setScale(scale);
-		scene.add.existing(this);
+		this.init();
 
+		this.on('pointerdown', (pointer) => {
+			if (pointer.rightButtonDown()) {
+				this.cell.exNihilo.doAction('action2', this.cell.row, this.cell.col);
+			}
+			else if (pointer.leftButtonDown()) {
+				this.cell.exNihilo.doAction('action1', this.cell.row, this.cell.col);
+			}
+		}, this);
 	}
+
+	init = () => {
+		this.setFillStyle(this.cell.color, 1);
+		this.setStrokeStyle(1, 0x000000);
+	}
+
 
 }
 

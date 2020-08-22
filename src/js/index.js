@@ -1,8 +1,8 @@
 import { Game } from 'phaser';
 import MainScene from './scenes/MainScene';
 import { config } from './config';
-import { ExNihilo } from './gameClasses/ExNihilo';
 
+import { ExNihilo } from './gameClasses/ExNihilo';
 
 const exNihilo = new ExNihilo();
 document.exNihilo = exNihilo;
@@ -13,7 +13,4 @@ const gameConfig = {
 	scene: [MainScene],
 };
 
-
 const game = new Game(gameConfig);
-
-console.log('game.scenes', game.scenes)

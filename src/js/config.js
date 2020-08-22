@@ -28,8 +28,13 @@ const config = {
 
 const gameSettings = {
     grid: {
-        nbCell: 10,
+        nbCol: 10,
+        nbRow: 10,
         cellSide: 50,
+    },
+    actions: {
+        action1: 'convert',
+        action2: 'neutralize'
     },
     player: {
         speedX: 100,
