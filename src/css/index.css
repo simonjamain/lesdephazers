@@ -1,19 +1,92 @@
+/* open-sans-regular - latin */
+@font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: local('Open Sans Regular'), local('OpenSans-Regular'),
+		url('../assets/fonts/open-sans-v17-latin-regular.woff2') format('woff2'),
+		/* Super Modern Browsers */
+			url('../assets/fonts/open-sans-v17-latin-regular.ttf')
+			format('truetype'); /* Safari, Android, iOS */
+}
+
+/* open-sans-600 - latin */
+@font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: local('Open Sans SemiBold'), local('OpenSans-SemiBold'),
+		url('../assets/fonts/open-sans-v17-latin-600.woff2') format('woff2'),
+		/* Super Modern Browsers */
+			url('../assets/fonts/open-sans-v17-latin-600.ttf')
+			format('truetype'); /* Safari, Android, iOS */
+}
+
+html {
+	font-size: 0.625em; /* fallback IE8+ */
+	font-size: calc(
+		1em * 0.625
+	); /* IE9-IE11 math fixing. See http://bit.ly/1g4X0bX */
+}
+
+/* Box sizing rules */
+html {
+	box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+	box-sizing: inherit;
+}
+
 html,
-body
-{
+body {
 	display: flex;
 	justify-content: flex-start;
-	align-items:center;
+	align-items: center;
 	height: 100%;
 	margin: 0;
 	background-color: #999;
 	overflow: hidden;
 }
 
-canvas
-{
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd,
+canvas {
+	margin: 0;
+	padding: 0;
+}
+
+canvas {
 	display: block;
 	/* width: 800px; */
 	height: 100%;
 }
 
+.fontLoader {
+	position: fixed;
+	left: -2000px;
+	margin: 0;
+	padding: 0;
+	max-width: 0;
+	max-height: 0;
+	overflow: hidden;
+	font-family: 'Open Sans';
+	font-weight: 400;
+	font-size: 1px;
+}
