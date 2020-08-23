@@ -19,13 +19,13 @@ export default class GameOverScene extends Scene {
 	create() {
 
 		this.winningFireworkEmitter = this.add.particles('spark').createEmitter({
-            speed: { min: -1200, max: 1200 },
-            angle: { min: 0, max: 360 },
-            scale: { start: 0.18, end: 0 },
-            blendMode: 'HARD_LIGHT ',
-            active: false,
-            lifespan: 800,
-            gravityY: 800
+			speed: { min: -1200, max: 1200 },
+			angle: { min: 0, max: 360 },
+			scale: { start: 0.18, end: 0 },
+			blendMode: 'HARD_LIGHT ',
+			active: false,
+			lifespan: 800,
+			gravityY: 800
 		});
 
 		const scoreBarWidth = 180;
@@ -68,12 +68,28 @@ export default class GameOverScene extends Scene {
 		const board = this.add.graphics();
 		board.fillStyle(this.exNihilo.player.color, .9);
 		board.fillRect(0, 0, window.innerWidth, gameSettings.score.board.height);
+
+		this.randFireworks();
+
 	}
 
-	launchFirework(x, y){
+	randFireworks = () => {
+
+		const f = Math.random() * .8 + .4;
+		this.launchFirework(this.getRandomCoordX(), this.getRandomCoordY(), f);
+
+		if (document.hidden)
+			return;
+
+		setTimeout(this.randFireworks, Math.random() * 1000);
+	}
+
+	launchFirework(x, y, f = 1) {
 		this.winningFireworkEmitter.active = true
 		this.winningFireworkEmitter.setPosition(x, y)
 		this.winningFireworkEmitter.setTint(this.exNihilo.players[0].color)
+		this.winningFireworkEmitter.setSpeed({ min: 200, max: 400 * f });
+		this.winningFireworkEmitter.setScale({ start: .15 * f, end: 0 });
 		this.winningFireworkEmitter.explode()
 		this.winningFireworkEmitter.explode()
 		this.winningFireworkEmitter.explode()
@@ -90,6 +106,16 @@ export default class GameOverScene extends Scene {
 		this.winningFireworkEmitter.explode()
 		this.winningFireworkEmitter.explode()
 		this.winningFireworkEmitter.explode()
+	}
+
+	getRandomCoordX = () => {
+		const x = 50 + (Math.random() * (window.innerWidth - 50));
+		return x;
+	}
+
+	getRandomCoordY = () => {
+		const y = 50 + (Math.random() * (window.innerHeight / 2 - 50));
+		return y;
 	}
 
 	update(time, delta) {
