@@ -20,31 +20,28 @@ export default class MainScene extends Scene {
 	}
 
 	preload() {
-		this.load.image('spark', 'assets/particles/white.png');
+		console.log(this.load.image('spark', 'assets/particles/white.png'));
 	}
 
 	create(data) {
 		
-		this.creationEmitter = this.add.particles('spark').createEmitter({
-            speed: { min: -100, max: 100 },
+		this.cellConvertionEmitter = this.add.particles('spark').createEmitter({
+            speed: { min: -300, max: 300 },
             angle: { min: 0, max: 360 },
-            scale: { start: 50, end: 0 },
-            blendMode: 'SCREEN',
-            tint: [ this.color ],
+            scale: { start: 0.09, end: 0 },
+            blendMode: 'NORMAL',
             active: false,
             lifespan: 500,
             gravityY: 0
-        });
+		});
 
-        
-        this.explosionEmmitter = this.add.particles('spark').createEmitter({
-            speed: { min: -600, max: 600 },
+        this.cellDestructionEmmitter = this.add.particles('spark').createEmitter({
+            speed: { min: 10, max: 100 },
             angle: { min: 0, max: 360 },
-            scale: { start: 0.5, end: 0 },
-            blendMode: 'SCREEN',
-            tint: [ this.color, this.color, 0x000000, 0x000000, 0x000000 ],
+            scale: { start: 0.07, end: 0 },
+			blendMode: 'NORMAL',
             active: false,
-            lifespan: 500,
+            lifespan: 300,
             gravityY: 0
         });
 	}

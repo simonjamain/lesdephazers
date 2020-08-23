@@ -5,49 +5,114 @@ export default class CellActionRule
         this.exNihilo = exNihilo;
     }
 
+    /**
+     * Creation
+     */
+
     convert(player, cell, force = false)
     {
-        if (force || !this.player)
-        {
-            console.log(this.exNihilo.scene.creationEmitter)
-            console.log(cell)
-            cell.setPlayer(player);
-            if(this.exNihilo.drawEvents)
+        if (force || player.getMunition())
+            if (!this.player)
             {
-                this.exNihilo.scene.creationEmitter.setPosition(cell.x, cell.y)
-                this.exNihilo.scene.creationEmitter.active = true
-                this.exNihilo.scene.creationEmitter.tint.onChange(0x00ff00)
-                this.exNihilo.scene.creationEmitter.explode()
-                this.exNihilo.scene.creationEmitter.explode()
-                this.exNihilo.scene.creationEmitter.explode()
-                this.exNihilo.scene.creationEmitter.explode()
+                cell.setPlayer(player);
+                player.removeMunition(force);
+                cell.launchConvertionAnimation(player.color);
             }
-        }
     }
+
+    circleConvert(player, cell, force = false)
+    {
+        const cells = cell.exNihilo.cells;
+        if (force || player.getMunition())
+        {
+            let col = cell.col - 1 >= 0 ? cell.col - 1 : cell.exNihilo.nbCol - 1;
+            let row = cell.row - 1 >= 0 ? cell.row - 1 : cell.exNihilo.nbRow - 1;
+            if (typeof(cells[col]) !== 'undefined' &&
+                typeof(cells[col][row]) !== 'undefined' &&
+                !cells[col][row].player)
+                    cells[col][row].setPlayer(player);
+                    cell.launchConvertionAnimation(player.color);
+
+            col = cell.col - 1 >= 0 ? cell.col - 1 : cell.exNihilo.nbCol - 1;
+            row = cell.row;
+            if (typeof(cells[col]) !== 'undefined' &&
+                !cells[col][row].player)
+                    cells[col][row].setPlayer(player);
+                    cell.launchConvertionAnimation(player.color);
+
+            col = cell.col - 1 >= 0 ? cell.col - 1 : cell.exNihilo.nbCol - 1;
+            row = cell.row + 1 < cell.exNihilo.nbRow ? cell.row + 1 : 0;
+            if (typeof(cells[col]) !== 'undefined' &&
+                typeof(cells[col][row]) !== 'undefined' &&
+                !cells[col][row].player)
+                    cells[col][row].setPlayer(player);
+                    cell.launchConvertionAnimation(player.color);
+            
+            col = cell.col;
+            row = cell.row + 1 < cell.exNihilo.nbRow ? cell.row + 1 : 0;
+            if (typeof(cells[col][row]) !== 'undefined' &&
+                !cells[col][row].player)
+                    cells[col][row].setPlayer(player);
+                    cell.launchConvertionAnimation(player.color);
+
+            col = cell.col + 1 < cell.exNihilo.nbCol ? cell.col + 1 : 0;
+            row = cell.row + 1 < cell.exNihilo.nbRow ? cell.row + 1 : 0;
+            if (typeof(cells[col]) !== 'undefined' &&
+                typeof(cells[col][row]) !== 'undefined' &&
+                !cells[col][row].player)
+                    cells[col][row].setPlayer(player);
+                    cell.launchConvertionAnimation(player.color);
+
+            col = cell.col + 1 < cell.exNihilo.nbCol ? cell.col + 1 : 0;
+            row = cell.row;
+            if (typeof(cells[col]) !== 'undefined' &&
+                !cells[col][row].player)
+                    cells[col][row].setPlayer(player);
+                    cell.launchConvertionAnimation(player.color);
+
+            col = cell.col + 1 < cell.exNihilo.nbCol ? cell.col + 1 : 0;
+            row = cell.row - 1 >= 0 ? cell.row - 1 : cell.exNihilo.nbRow - 1;
+            if (typeof(cells[col]) !== 'undefined' &&
+                typeof(cells[col][row]) !== 'undefined' &&
+                !cells[col][row].player)
+                    cells[col][row].setPlayer(player);
+                    cell.launchConvertionAnimation(player.color);
+
+            col = cell.col;
+            row = cell.row - 1 >= 0 ? cell.row - 1 : cell.exNihilo.nbRow - 1;
+            if (typeof(cells[col][row]) !== 'undefined' &&
+                !cells[col][row].player)
+                    cells[col][row].setPlayer(player);
+                    cell.launchConvertionAnimation(player.color);
+
+            player.removeMunition(force);
+        }
+
+    }
+
+    /**
+     * Destruction
+     */
 
     neutralize(player, cell, force = false)
     {
-        if (force || cell.player && cell.player.color != player.color)
-        {
-            cell.setPlayer(null);
-            if(this.exNihilo.drawEvents)
+        if (force || player.getMunition())
+            if (cell.player && cell.player.color != player.color)
             {
-                this.exNihilo.scene.explosionEmmitter.setPosition(cell.x, cell.y)
-                this.exNihilo.scene.explosionEmmitter.active = true
-                this.exNihilo.scene.explosionEmmitter.explode()
-                this.exNihilo.scene.explosionEmmitter.explode()
-                this.exNihilo.scene.explosionEmmitter.explode()
+                cell.setPlayer(null);
+                player.removeMunition(force);
+                cell.launchDestructionAnimation(cell.player.color);
             }
-        }
     }
 
     neutralizeAll(player, cell, force = false)
     {
-        cell.setPlayer(null);
-        if(this.exNihilo.drawEvents)
+        if (force || player.getMunition())
         {
-            this.exNihilo.scene.explosionEmmitter.setPosition(cell.x, cell.y)
-            this.exNihilo.scene.explosionEmmitter.explode()
+            let prevPlayerColorOrCurrentPlayerColorIfEmpty = (cell.player != null) ? cell.player.color : player.color
+            cell.setPlayer(null);
+            player.removeMunition(force);
+            cell.launchDestructionAnimation(prevPlayerColorOrCurrentPlayerColorIfEmpty);
         }
     }
 }
