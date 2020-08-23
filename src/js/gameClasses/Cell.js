@@ -19,6 +19,7 @@ export default class Cell {
 		this.y = this.getCoord().y;
 
 		this.special = false;
+		this.rand = null;
 		this.action1 = action1;
 		this.action2 = action2;
 

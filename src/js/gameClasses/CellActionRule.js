@@ -16,10 +16,10 @@ export default class CellActionRule
      * Helpers
      */
 
-    getRandomInt(min, max) {
+    getRandomInt(min, max, rand) {
         min = Math.ceil(min);
         max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min +1)) + min;
+        return Math.floor(rand * (max - min +1)) + min;
     }
 
     /**
@@ -153,7 +153,7 @@ export default class CellActionRule
      */
 
     random = (player, cell) => {
-        const rand = this.getRandomInt(1, this.actions.length) - 1;
+        const rand = this.getRandomInt(1, this.actions.length, cell.rand) - 1;
 
         cell.setPlayer(null);
         this[this.actions[rand]](player, cell, true);

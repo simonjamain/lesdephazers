@@ -133,6 +133,18 @@ export default class CellIterationRule {
         return {nbNeihbor: nbNeihbor, counter: counter};
     }
 
+    bonuxify = (cell, rand = Math.random()) => {
+        if (Math.random() < 0.00005 + this.exNihilo.players.length / 100000)
+        {
+            cell.futurPlayer = new Player(this.exNihilo, 0x010101);
+            cell.special = true;
+            cell.rand = rand;
+            cell.action1 = this.exNihilo.cellActionRule['random'];
+            cell.action2 = cell.action1;
+            console.log('bonux');
+        }
+    }
+
     basic = (cell) => {
         const {nbNeihbor, counter} = this.getNeihborhood(cell);
 
@@ -172,13 +184,6 @@ export default class CellIterationRule {
             });
         else
             cell.futurPlayer = null;
-        if (Math.random() < 0.00005 + this.exNihilo.players.length / 100000)
-        {
-            cell.futurPlayer = new Player(this.exNihilo, 0x010101);
-            cell.special = true;
-            cell.action1 = this.exNihilo.cellActionRule['random'];
-            cell.action2 = cell.action1;
-            console.log('bonux');
-        }
+        this.bonuxify(cell);
     }
 }
