@@ -32,7 +32,6 @@ export default class GameOverScene extends Scene {
 		const scoreBarWidth = 180;
 		const scoreBarMaxHeight = this.height * 2 / 3;
 		const scoreBarMinHeight = 65;
-		console.log('this.exNihilo.players.length', this.exNihilo.players.length)
 		const barsXOffset = this.exNihilo.players.length <= this.nbDisplayedWinners ?
 			this.exNihilo.players.length * scoreBarWidth : scoreBarWidth * this.nbDisplayedWinners;
 
