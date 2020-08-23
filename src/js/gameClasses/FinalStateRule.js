@@ -11,7 +11,7 @@ export default class FinalStateRule {
                 if (j.player !== null)
                     j.player.nbPoints++;
             }));
-            this.exNihilo.players = [...this.exNihilo.players, this.exNihilo.player];
+            // this.exNihilo.players = [...this.exNihilo.players, this.exNihilo.player];
             this.exNihilo.players.sort((a, b) => b.nbPoints - a.nbPoints);
             this.exNihilo.scene.scene.start('gameOverScene', {
                 exNihilo: this.exNihilo
