@@ -34,7 +34,7 @@ const gameSettings = {
     },
     actions: {
         action1: 'convert',
-        action2: 'neutralizeAndCycle'
+        action2: 'explode'
     },
     rule: 'surprise',
     player: {
