@@ -3,7 +3,7 @@ import { gameSettings } from '../config';
 export default class GameOverScene extends Scene {
 	constructor() {
 		super({ key: 'gameOverScene' });
-		this.nbDisplayedWinners = 2;
+		this.nbDisplayedWinners = 4;
 	}
 
 	init(data) {

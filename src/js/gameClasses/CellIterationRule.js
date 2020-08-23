@@ -134,15 +134,14 @@ export default class CellIterationRule {
     }
 
     bonuxify = (cell, force = false, rand = Math.random()) => {
-        if (force || Math.random() < 0.00005 + this.exNihilo.players.length / 100000)
-        {
+        if (force || Math.random() < 0.00005 + this.exNihilo.players.length / 100000) {
             cell.setPlayer(new Player(this.exNihilo, 0x010101));
             cell.special = true;
             cell.rand = rand;
             cell.action1 = this.exNihilo.cellActionRule['random'];
             cell.action2 = cell.action1;
-            console.log(cell);
-            console.log(rand);
+            // console.log(cell);
+            // console.log(rand);
         }
     }
 
