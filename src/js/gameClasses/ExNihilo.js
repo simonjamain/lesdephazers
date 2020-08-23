@@ -3,7 +3,6 @@ import Player from './Player';
 import Cell from './Cell';
 import CellIterationRule from './CellIterationRule';
 import CellActionRule from './CellActionRule';
-/** import CellActionRule from ./CellActionRule */
 import MultiplayerServer from "./MultiplayerServer"
 import Action from './Action';
 import FinalStateRule from './FinalStateRule';
@@ -13,14 +12,16 @@ export class ExNihilo {
 	timeElapsed = 0;
 
 	init({ scene, w, h }) {
-		this.multiplayerServer = new MultiplayerServer(this, "http://127.0.0.1:3000")//Note : this has to be set early
-		// this.multiplayerServer = new MultiplayerServer(this, "http://localhost:3002")//Note : this has to be set early
+		// this.multiplayerServer = new MultiplayerServer(this, "http://127.0.0.1:3000")//Note : this has to be set early
+		this.multiplayerServer = new MultiplayerServer(this, "http://localhost:3002")//Note : this has to be set early
 		this.cellActionRule = new CellActionRule(this);
 		this.cellIterationRule = new CellIterationRule(this);
 
 		this.cells = [];
 		this.nbCol = w;
 		this.nbRow = h;
+		this.defaultAction1 = this.cellActionRule[gameSettings.actions.action1];
+		this.defaultAction2 = this.cellActionRule[gameSettings.actions.action2];
 		for (let i = 0; i < w; i++) {
 			this.cells[i] = [];
 			for (let j = 0; j < h; j++)
@@ -29,8 +30,8 @@ export class ExNihilo {
 					scene,
 					j,
 					i,
-					this.cellActionRule[gameSettings.actions.action1],
-					this.cellActionRule[gameSettings.actions.action2],
+					this.defaultAction1,
+					this.defaultAction2,
 					this.cellIterationRule[gameSettings.rule]
 				);
 		}

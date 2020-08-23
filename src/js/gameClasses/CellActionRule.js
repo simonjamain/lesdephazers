@@ -3,6 +3,22 @@ export default class CellActionRule
     constructor(exNihilo)
     {
         this.exNihilo = exNihilo;
+        this.actions = [
+            'convert',
+            'circleConvert',
+            'neutralize',
+            'neutralizeAll',
+        ]
+    }
+
+    /**
+     * Helpers
+     */
+
+    getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min +1)) + min;
     }
 
     /**
@@ -102,5 +118,19 @@ export default class CellActionRule
             cell.setPlayer(null);
             player.removeMunition(force);
         }
+    }
+
+    /**
+     * Bonus
+     */
+
+    random = (player, cell) => {
+        const rand = this.getRandomInt(1, this.actions.length) - 1;
+
+        cell.setPlayer(null);
+        this[this.actions[rand]](player, cell, true);
+        cell.special = false;
+        cell.action1 = this.exNihilo.defaultAction1;
+        cell.action2 = this.exNihilo.defaultAction2;
     }
 }
