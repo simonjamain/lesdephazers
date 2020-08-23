@@ -13,13 +13,11 @@ export default class Player {
     addMunition(force = false) {
         if (force || this.nbMunitionLeft < this.nbMunitionMax)
             this.nbMunitionLeft += 1;
-        // console.log(this.getMunition());
     }
 
     removeMunition(force = false) {
         if (force || this.nbMunitionLeft > 0)
             this.nbMunitionLeft -= 1;
-        // console.log(this.getMunition());
     }
 
     getMunition() {
