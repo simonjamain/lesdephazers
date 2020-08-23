@@ -10,7 +10,7 @@
 		"sync": "npm-run-all -p cp syncCss syncAssets",
 		"cp": "copyfiles -f ./src/*.html ./src/.htaccess ./src/*.txt ./src/*.md ./dist",
 		"del": "del-cli dist/*",
-		"browserSync": "browser-sync dist -w --cors -p 3001",
+		"browserSync": "browser-sync dist -w --cors",
 		"watch": "npm-watch",
 		"build": "npm-run-all del sync parcelBuild",
 		"dev": "npm-run-all del sync parcelDev",
