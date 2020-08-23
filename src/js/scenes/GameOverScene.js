@@ -17,6 +17,17 @@ export default class GameOverScene extends Scene {
 	}
 
 	create() {
+
+		this.winningFireworkEmitter = this.add.particles('spark').createEmitter({
+            speed: { min: -1200, max: 1200 },
+            angle: { min: 0, max: 360 },
+            scale: { start: 0.18, end: 0 },
+            blendMode: 'HARD_LIGHT ',
+            active: false,
+            lifespan: 800,
+            gravityY: 800
+		});
+
 		const scoreBarWidth = 180;
 		const scoreBarMaxHeight = 500;
 		const scoreBarMinHeight = 65;
@@ -59,7 +70,27 @@ export default class GameOverScene extends Scene {
 		board.fillRect(0, 0, window.innerWidth, gameSettings.score.board.height);
 	}
 
-
+	launchFirework(x, y){
+		this.winningFireworkEmitter.active = true
+		this.winningFireworkEmitter.setPosition(x, y)
+		this.winningFireworkEmitter.setTint(this.exNihilo.players[0].color)
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+	}
 
 	update(time, delta) {
 	}

@@ -24,7 +24,7 @@ export default class MainScene extends Scene {
 	}
 
 	create(data) {
-		
+
 		this.cellConvertionEmitter = this.add.particles('spark').createEmitter({
             speed: { min: -300, max: 300 },
             angle: { min: 0, max: 360 },
