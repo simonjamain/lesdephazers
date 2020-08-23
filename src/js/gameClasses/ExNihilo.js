@@ -34,7 +34,7 @@ export class ExNihilo {
 
 		this.scene = scene;
 		this.nbActionOnStartupDefault = 2;
-		this.player = { color: Math.round(Math.random() * 0xffffff) };
+		this.player = new Player(this, Math.round(Math.random() * 0xffffff));
 		this.multiplayerServer.sendNewPlayer(this.player.color)
 		this.players = [];
 		this.players.push(this.player)

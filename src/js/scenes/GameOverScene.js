@@ -18,10 +18,12 @@ export default class GameOverScene extends Scene {
 	}
 
 	create() {
+
+		console.log('this.exNihilo.players', this.exNihilo.players)
 		for (let index = 0; index < this.exNihilo.players.length && index < 4; index++) {
 
 			const scoreMessage = this.add.text(window.innerWidth / 2, 200 + 120 * index,
-				`Rang ${index + 1} : ${this.exNihilo.players[index].nbPoints} Points`,
+				`${index === 0 ? '👑' : ''} ${this.exNihilo.players[index].nbPoints} Points`,
 				{
 					color: `#${this.exNihilo.players[index].color.toString(16).padStart(6, '0')}`, align: 'center', fontFamily: 'cursive', fontSize: 80
 				});
