@@ -3,7 +3,7 @@ import { gameSettings } from '../config';
 export default class GameOverScene extends Scene {
 	constructor() {
 		super({ key: 'gameOverScene' });
-
+		this.nbDisplayedWinners = 2;
 	}
 
 	init(data) {
@@ -32,15 +32,16 @@ export default class GameOverScene extends Scene {
 		const scoreBarWidth = 180;
 		const scoreBarMaxHeight = this.height * 2 / 3;
 		const scoreBarMinHeight = 65;
-		const barsXOffset = this.exNihilo.players.length <= 4 ?
-			this.exNihilo.players.length * scoreBarWidth / 2 : scoreBarWidth * 4 / 2;
+		console.log('this.exNihilo.players.length', this.exNihilo.players.length)
+		const barsXOffset = this.exNihilo.players.length <= this.nbDisplayedWinners ?
+			this.exNihilo.players.length * scoreBarWidth : scoreBarWidth * this.nbDisplayedWinners;
 
 		const scoreMax = typeof this.exNihilo.players[0] !== undefined && this.exNihilo.players[0].nbPoints > 0 ? this.exNihilo.players[0].nbPoints : 1;
 
-		for (let index = 0; index < this.exNihilo.players.length && index < 4; index++) {
+		for (let index = 0; index < this.exNihilo.players.length && index < this.nbDisplayedWinners; index++) {
 
 			const scoreBarHeight = this.exNihilo.players[index].nbPoints / scoreMax * scoreBarMaxHeight + scoreBarMinHeight;
-			const scoreBarMiddleX = scoreBarWidth * index - .5 * scoreBarWidth + this.width / 2 - barsXOffset / 2;
+			const scoreBarMiddleX = (index + 0.5) * scoreBarWidth - barsXOffset / 2 + this.width / 2;
 
 			const scoreBar = new GameObjects.Rectangle(this,
 				scoreBarMiddleX,
