@@ -134,8 +134,13 @@ export default class CellIterationRule {
     }
 
     bonuxify = (cell, force = false, rand = Math.random()) => {
+
+
         if (force || Math.random() < 0.00005 + this.exNihilo.players.length / 100000)
         {
+
+            console.log("cell : ")
+            console.log(cell)
             cell.futurPlayer = new Player(this.exNihilo, 0x010101);
             cell.special = true;
             cell.rand = rand;
@@ -183,6 +188,6 @@ export default class CellIterationRule {
             });
         else
             cell.futurPlayer = null;
-        this.bonuxify(cell);
+            
     }
 }
