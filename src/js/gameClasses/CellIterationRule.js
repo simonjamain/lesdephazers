@@ -130,7 +130,7 @@ export default class CellIterationRule {
                     });
             })
         }
-        return {nbNeihbor: nbNeihbor, counter: counter};
+        return { nbNeihbor: nbNeihbor, counter: counter };
     }
 
     bonuxify = (cell, force = false, rand = Math.random()) => {
@@ -147,7 +147,7 @@ export default class CellIterationRule {
     }
 
     basic = (cell) => {
-        const {nbNeihbor, counter} = this.getNeihborhood(cell);
+        const { nbNeihbor, counter } = this.getNeihborhood(cell);
 
         if (counter.length > 0)
             counter.map(m => {
@@ -165,12 +165,11 @@ export default class CellIterationRule {
     }
 
     surprise = (cell) => {
-        if (cell.special)
-        {
+        if (cell.special) {
             cell.futurPlayer = cell.player;
             return;
         }
-        const {nbNeihbor, counter} = this.getNeihborhood(cell);
+        const { nbNeihbor, counter } = this.getNeihborhood(cell);
 
         if (counter.length > 0)
             counter.map(m => {
@@ -185,6 +184,6 @@ export default class CellIterationRule {
             });
         else
             cell.futurPlayer = null;
-            
+
     }
 }

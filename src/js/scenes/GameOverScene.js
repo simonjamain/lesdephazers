@@ -19,7 +19,6 @@ export default class GameOverScene extends Scene {
 	}
 
 	create() {
-		console.log('this.width', this.width)
 		this.winningFireworkEmitter = this.add.particles('spark').createEmitter({
 			speed: { min: -1200, max: 1200 },
 			angle: { min: 0, max: 360 },
