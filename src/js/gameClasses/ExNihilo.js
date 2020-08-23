@@ -12,8 +12,8 @@ export class ExNihilo {
 	timeElapsed = 0;
 
 	init({ scene, w, h }) {
-		//this.multiplayerServer = new MultiplayerServer(this, "http://vps.simonjamain.fr:3000")//Note : this has to be set early
-		this.multiplayerServer = new MultiplayerServer(this, "http://localhost:3002")//Note : this has to be set early
+		this.multiplayerServer = new MultiplayerServer(this, "http://vps.simonjamain.fr:3000")//Note : this has to be set early
+		// this.multiplayerServer = new MultiplayerServer(this, "http://localhost:3002")//Note : this has to be set early
 		this.cellActionRule = new CellActionRule(this);
 		this.cellIterationRule = new CellIterationRule(this);
 
@@ -83,7 +83,7 @@ export class ExNihilo {
 		this.players.forEach(player => player.addMunition());
 	}
 
-	addSpecialCell(specialCellEvent){
+	addSpecialCell(specialCellEvent) {
 		let cell = this.cells[specialCellEvent.col][specialCellEvent.row]
 		this.cellIterationRule.bonuxify(cell, true, specialCellEvent.randNumber)
 	}
