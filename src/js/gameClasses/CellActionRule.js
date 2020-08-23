@@ -8,6 +8,7 @@ export default class CellActionRule
             'circleConvert',
             'neutralize',
             'neutralizeAll',
+            'neutralizeAndCycle'
         ]
     }
 
@@ -128,6 +129,21 @@ export default class CellActionRule
             let prevPlayerColorOrCurrentPlayerColorIfEmpty = (cell.player != null) ? cell.player.color : player.color
             cell.setPlayer(null);
             player.removeMunition(force);
+            cell.launchDestructionAnimation(prevPlayerColorOrCurrentPlayerColorIfEmpty);
+        }
+    }
+
+    neutralizeAndCycle(player, cell, force = false)
+    {
+        if (force || player.getMunition() || (cell.player && player.color === cell.player.color))
+        {
+            let prevPlayerColorOrCurrentPlayerColorIfEmpty = (cell.player != null) ? cell.player.color : player.color;
+            if (cell.player && player.color === cell.player.color)
+                player.addMunition(force);
+            else
+                if (cell.player)
+                    player.removeMunition(force);
+            cell.setPlayer(null);
             cell.launchDestructionAnimation(prevPlayerColorOrCurrentPlayerColorIfEmpty);
         }
     }
