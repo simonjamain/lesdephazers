@@ -29,7 +29,7 @@ export default class GameOverScene extends Scene {
 		});
 
 		const scoreBarWidth = 180;
-		const scoreBarMaxHeight = 500;
+		const scoreBarMaxHeight = window.innerHeight * 2 / 3;
 		const scoreBarMinHeight = 65;
 		const barsXOffset = this.exNihilo.players.length <= 4 ?
 			this.exNihilo.players.length * scoreBarWidth / 2 : this.exNihilo.players.length * 4 / 2;
