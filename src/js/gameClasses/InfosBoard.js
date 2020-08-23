@@ -23,7 +23,7 @@ export default class InfoBoard {
 
 		this.scene.add.existing(this.generationBar);
 
-		this.timeText = this.scene.add.text(window.innerWidth - 360, gameSettings.score.text.y, 'Time : ', {
+		this.timeText = this.scene.add.text(window.innerWidth - 360, gameSettings.score.text.y, 'Remaining : ', {
 			color: '#f2f2f2', align: 'center', fontFamily: '"Open Sans"', fontSize: 40
 		});
 

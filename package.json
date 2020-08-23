@@ -13,7 +13,7 @@
 		"browserSync": "browser-sync dist -w --cors",
 		"watch": "npm-watch",
 		"build": "npm-run-all del sync parcelBuild",
-		"dev": "npm-run-all sync parcelDev",
+		"dev": "npm-run-all del sync parcelDev",
 		"start": "npm-run-all -p browserSync watch"
 	},
 	"author": "pil",
@@ -39,17 +39,11 @@
 		"phaser": "^3.24.1"
 	},
 	"watch": {
-		"parcelDev": {
+		"dev": {
 			"patterns": [
 				"./src"
 			],
-			"extensions": "html, js"
-		},
-		"sync": {
-			"patterns": [
-				"./src"
-			],
-			"extensions": "html, css, ttf, jpg, jpeg, png, gif, json"
+			"extensions": "html, js, css, ttf, jpg, jpeg, png, gif, json"
 		}
 	},
 	"browserslist": [
