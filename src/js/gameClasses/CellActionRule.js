@@ -32,6 +32,7 @@ export default class CellActionRule
             {
                 cell.setPlayer(player);
                 player.removeMunition(force);
+                cell.launchConvertionAnimation(player.color);
             }
     }
 
@@ -46,12 +47,14 @@ export default class CellActionRule
                 typeof(cells[col][row]) !== 'undefined' &&
                 !cells[col][row].player)
                     cells[col][row].setPlayer(player);
+                    cell.launchConvertionAnimation(player.color);
 
             col = cell.col - 1 >= 0 ? cell.col - 1 : cell.exNihilo.nbCol - 1;
             row = cell.row;
             if (typeof(cells[col]) !== 'undefined' &&
                 !cells[col][row].player)
                     cells[col][row].setPlayer(player);
+                    cell.launchConvertionAnimation(player.color);
 
             col = cell.col - 1 >= 0 ? cell.col - 1 : cell.exNihilo.nbCol - 1;
             row = cell.row + 1 < cell.exNihilo.nbRow ? cell.row + 1 : 0;
@@ -59,12 +62,14 @@ export default class CellActionRule
                 typeof(cells[col][row]) !== 'undefined' &&
                 !cells[col][row].player)
                     cells[col][row].setPlayer(player);
+                    cell.launchConvertionAnimation(player.color);
             
             col = cell.col;
             row = cell.row + 1 < cell.exNihilo.nbRow ? cell.row + 1 : 0;
             if (typeof(cells[col][row]) !== 'undefined' &&
                 !cells[col][row].player)
                     cells[col][row].setPlayer(player);
+                    cell.launchConvertionAnimation(player.color);
 
             col = cell.col + 1 < cell.exNihilo.nbCol ? cell.col + 1 : 0;
             row = cell.row + 1 < cell.exNihilo.nbRow ? cell.row + 1 : 0;
@@ -72,12 +77,14 @@ export default class CellActionRule
                 typeof(cells[col][row]) !== 'undefined' &&
                 !cells[col][row].player)
                     cells[col][row].setPlayer(player);
+                    cell.launchConvertionAnimation(player.color);
 
             col = cell.col + 1 < cell.exNihilo.nbCol ? cell.col + 1 : 0;
             row = cell.row;
             if (typeof(cells[col]) !== 'undefined' &&
                 !cells[col][row].player)
                     cells[col][row].setPlayer(player);
+                    cell.launchConvertionAnimation(player.color);
 
             col = cell.col + 1 < cell.exNihilo.nbCol ? cell.col + 1 : 0;
             row = cell.row - 1 >= 0 ? cell.row - 1 : cell.exNihilo.nbRow - 1;
@@ -85,12 +92,14 @@ export default class CellActionRule
                 typeof(cells[col][row]) !== 'undefined' &&
                 !cells[col][row].player)
                     cells[col][row].setPlayer(player);
+                    cell.launchConvertionAnimation(player.color);
 
             col = cell.col;
             row = cell.row - 1 >= 0 ? cell.row - 1 : cell.exNihilo.nbRow - 1;
             if (typeof(cells[col][row]) !== 'undefined' &&
                 !cells[col][row].player)
                     cells[col][row].setPlayer(player);
+                    cell.launchConvertionAnimation(player.color);
 
             player.removeMunition(force);
         }
@@ -108,6 +117,7 @@ export default class CellActionRule
             {
                 cell.setPlayer(null);
                 player.removeMunition(force);
+                cell.launchDestructionAnimation(cell.player.color);
             }
     }
 
@@ -115,8 +125,10 @@ export default class CellActionRule
     {
         if (force || player.getMunition())
         {
+            let prevPlayerColorOrCurrentPlayerColorIfEmpty = (cell.player != null) ? cell.player.color : player.color
             cell.setPlayer(null);
             player.removeMunition(force);
+            cell.launchDestructionAnimation(prevPlayerColorOrCurrentPlayerColorIfEmpty);
         }
     }
 

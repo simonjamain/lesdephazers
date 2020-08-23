@@ -1,5 +1,5 @@
-import { Scene } from 'phaser';
-
+import { Scene, GameObjects } from 'phaser';
+import { gameSettings } from '../config';
 export default class GameOverScene extends Scene {
 	constructor() {
 		super({ key: 'gameOverScene' });
@@ -11,30 +11,85 @@ export default class GameOverScene extends Scene {
 	}
 
 	preload() {
-		// console.log('overpreload')
-		// let test = this.load.bitmapFont('pixelFont', '../../assets/fonts/font.png', '../../assets/fonts/font.xml');
-		// console.log('test', test)
+
+		this.load.image('crown', 'assets/images/crown.png');
 
 	}
 
 	create() {
 
-		console.log('this.exNihilo.players', this.exNihilo.players)
+		this.winningFireworkEmitter = this.add.particles('spark').createEmitter({
+            speed: { min: -1200, max: 1200 },
+            angle: { min: 0, max: 360 },
+            scale: { start: 0.18, end: 0 },
+            blendMode: 'HARD_LIGHT ',
+            active: false,
+            lifespan: 800,
+            gravityY: 800
+		});
+
+		const scoreBarWidth = 180;
+		const scoreBarMaxHeight = 500;
+		const scoreBarMinHeight = 65;
+		const barsXOffset = this.exNihilo.players.length <= 4 ?
+			this.exNihilo.players.length * scoreBarWidth / 2 : this.exNihilo.players.length * 4 / 2;
+
+		const scoreMax = typeof this.exNihilo.players[0] !== undefined && this.exNihilo.players[0].nbPoints > 0 ? this.exNihilo.players[0].nbPoints : 1;
+
 		for (let index = 0; index < this.exNihilo.players.length && index < 4; index++) {
 
-			const scoreMessage = this.add.text(window.innerWidth / 2, 200 + 120 * index,
-				`${index === 0 ? '👑' : ''} ${this.exNihilo.players[index].nbPoints} Points`,
-				{
-					color: `#${this.exNihilo.players[index].color.toString(16).padStart(6, '0')}`, align: 'center', fontFamily: '"Open Sans"', fontSize: 80
-				});
+			const scoreBarHeight = this.exNihilo.players[index].nbPoints / scoreMax * scoreBarMaxHeight + scoreBarMinHeight;
+			const scoreBarMiddleX = scoreBarWidth * index + window.innerWidth / 2 - barsXOffset / 2 - scoreBarWidth / 2;
 
-			scoreMessage.setPadding(20, 15);
-			scoreMessage.setShadow(10, 10, '#222', 5);
-			scoreMessage.x = window.innerWidth / 2 - scoreMessage.width / 2;
+			const scoreBar = new GameObjects.Rectangle(this,
+				scoreBarMiddleX,
+				window.innerHeight - scoreBarHeight / 2,
+				scoreBarWidth,
+				scoreBarHeight,
+				this.exNihilo.players[index].color, 1);
+
+			this.add.existing(scoreBar);
+
+			const scoreText = this.add.text(scoreBarMiddleX, window.innerHeight - scoreBarMinHeight + 10,
+				`${this.exNihilo.players[index].nbPoints}`,
+				{
+					color: `#ffffff`, align: 'center', fontFamily: '"Open Sans"', fontSize: 40
+				});
+			scoreText.x = scoreBarMiddleX - scoreText.width / 2;
+
+			if (index === 0 && this.exNihilo.players[index].nbPoints !== 0) {
+				const crown = this.add.image(scoreBarMiddleX - scoreBarWidth / 2 + 5, window.innerHeight - scoreBarHeight - 15, 'crown');
+				crown.setScale(.2, .2);
+				crown.setAngle(-23);
+			}
+
 		}
 
+		const board = this.add.graphics();
+		board.fillStyle(this.exNihilo.player.color, .9);
+		board.fillRect(0, 0, window.innerWidth, gameSettings.score.board.height);
+	}
 
-
+	launchFirework(x, y){
+		this.winningFireworkEmitter.active = true
+		this.winningFireworkEmitter.setPosition(x, y)
+		this.winningFireworkEmitter.setTint(this.exNihilo.players[0].color)
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
+		this.winningFireworkEmitter.explode()
 	}
 
 	update(time, delta) {

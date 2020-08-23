@@ -36,6 +36,31 @@ export default class Cell {
 		this.cellSprite.init();
 	}
 
+	launchConvertionAnimation(color){
+		if(this.exNihilo.drawEvents)
+		{
+			this.exNihilo.scene.cellConvertionEmitter.active = true
+			this.exNihilo.scene.cellConvertionEmitter.setPosition(this.x, this.y)
+			this.exNihilo.scene.cellConvertionEmitter.setTint(color)
+			this.exNihilo.scene.cellConvertionEmitter.explode()
+			this.exNihilo.scene.cellConvertionEmitter.explode()
+			this.exNihilo.scene.cellConvertionEmitter.explode()
+			this.exNihilo.scene.cellConvertionEmitter.explode()
+		}
+	}
+	
+	launchDestructionAnimation(color){
+		if(this.exNihilo.drawEvents)
+		{
+			this.exNihilo.scene.cellDestructionEmmitter.active = true
+			this.exNihilo.scene.cellDestructionEmmitter.setPosition(this.x, this.y)
+			this.exNihilo.scene.cellDestructionEmmitter.setTint(color)
+			this.exNihilo.scene.cellDestructionEmmitter.explode()
+			this.exNihilo.scene.cellDestructionEmmitter.explode()
+			this.exNihilo.scene.cellDestructionEmmitter.explode()
+		}
+	}
+
 	getCoord() {
 		return {
 			x: this.row * this.side + this.side / 2,
