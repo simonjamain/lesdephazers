@@ -33,7 +33,7 @@ const gameSettings = {
         cellSide: 17,
     },
     actions: {
-        action1: 'convert',
+        action1: 'circleConvert',
         action2: 'neutralizeAll'
     },
     rule: 'basic',

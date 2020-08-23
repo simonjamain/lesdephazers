@@ -19,6 +19,8 @@ export class ExNihilo {
 		this.cellIterationRule = new CellIterationRule(this);
 
 		this.cells = [];
+		this.nbCol = w;
+		this.nbRow = h;
 		for (let i = 0; i < w; i++) {
 			this.cells[i] = [];
 			for (let j = 0; j < h; j++)
@@ -34,13 +36,13 @@ export class ExNihilo {
 		}
 
 		this.scene = scene;
-		this.nbActionOnStartupDefault = 2;
-		this.player = { color: Math.round(Math.random() * 0xffffff) };
+		this.nbMunitionMaxDefault = 5;
+		this.nbMunitionOnStartupDefault = 2;
+		this.player = new Player(this, Math.round(Math.random() * 0xffffff));
 		this.multiplayerServer.sendNewPlayer(this.player.color)
 		this.players = [];
-		this.players.push(this.player)
+		this.players.push(this.player);
 
-		this.munitionMaxDefault = 5;
 		this.finalStateRule = new FinalStateRule(this);
 		this.elapsedTime = 0; /** seconds */
 		this.infosBoard = new InfosBoard(this);
@@ -76,7 +78,7 @@ export class ExNihilo {
 	 * action from server
 	 */
 	addAmmunition(){
-		console.log("new ammunition")
+		this.players.forEach(player => player.addMunition());
 	}
 
 	/** From server */
