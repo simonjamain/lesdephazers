@@ -39,7 +39,7 @@ export default class GameOverScene extends Scene {
 		for (let index = 0; index < this.exNihilo.players.length && index < 4; index++) {
 
 			const scoreBarHeight = this.exNihilo.players[index].nbPoints / scoreMax * scoreBarMaxHeight + scoreBarMinHeight;
-			const scoreBarMiddleX = scoreBarWidth * index + window.innerWidth / 2 - barsXOffset / 2 - scoreBarWidth / 2;
+			const scoreBarMiddleX = scoreBarWidth * index + window.innerWidth / 2 - barsXOffset / 2;
 
 			const scoreBar = new GameObjects.Rectangle(this,
 				scoreBarMiddleX,
