@@ -1,11 +1,7 @@
 export default class FinalStateRule {
     constructor(exNihilo) {
         this.exNihilo = exNihilo;
-<<<<<<< HEAD
         this.maxTime = 20;
-=======
-        this.maxTime = 120;
->>>>>>> master
     }
 
     checkState() {
