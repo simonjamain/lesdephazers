@@ -33,6 +33,10 @@ class MultiplayerServer {
             this.exNihilo.addAmmunition();
         });
 
+        this.socket.on('newSpecialCell', (specialCellEvent) => {
+            this.exNihilo.addSpecialCell(specialCellEvent);
+        });
+
         this.socket.on('iterate', (iterationDuration) => {
             this.exNihilo.iterateCells(iterationDuration);
         });

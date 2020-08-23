@@ -3,7 +3,6 @@ import Player from './Player';
 import Cell from './Cell';
 import CellIterationRule from './CellIterationRule';
 import CellActionRule from './CellActionRule';
-/** import CellActionRule from ./CellActionRule */
 import MultiplayerServer from "./MultiplayerServer"
 import Action from './Action';
 import FinalStateRule from './FinalStateRule';
@@ -21,6 +20,8 @@ export class ExNihilo {
 		this.cells = [];
 		this.nbCol = w;
 		this.nbRow = h;
+		this.defaultAction1 = this.cellActionRule[gameSettings.actions.action1];
+		this.defaultAction2 = this.cellActionRule[gameSettings.actions.action2];
 		for (let i = 0; i < w; i++) {
 			this.cells[i] = [];
 			for (let j = 0; j < h; j++)
@@ -29,8 +30,8 @@ export class ExNihilo {
 					scene,
 					j,
 					i,
-					this.cellActionRule[gameSettings.actions.action1],
-					this.cellActionRule[gameSettings.actions.action2],
+					this.defaultAction1,
+					this.defaultAction2,
 					this.cellIterationRule[gameSettings.rule]
 				);
 		}
@@ -78,8 +79,13 @@ export class ExNihilo {
 	/**
 	 * action from server
 	 */
-	addAmmunition(){
+	addAmmunition() {
 		this.players.forEach(player => player.addMunition());
+	}
+
+	addSpecialCell(specialCellEvent){
+		let cell = this.cells[specialCellEvent.col][specialCellEvent.row]
+		this.cellIterationRule.bonuxify(cell, true, specialCellEvent.randNumber)
 	}
 
 	/** From server */

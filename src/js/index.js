@@ -5,6 +5,7 @@ import { config } from './config';
 
 import { ExNihilo } from './gameClasses/ExNihilo';
 
+
 const gameConfig = {
 	...config,
 	scene: [MainScene, GameOverScene],

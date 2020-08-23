@@ -18,6 +18,8 @@ export default class Cell {
 		this.x = this.getCoord().x;
 		this.y = this.getCoord().y;
 
+		this.special = false;
+		this.rand = null;
 		this.action1 = action1;
 		this.action2 = action2;
 
@@ -32,12 +34,11 @@ export default class Cell {
 	setPlayer = (player) => {
 		this.player = player;
 		this.color = this.player?.color && this.player !== null ? this.player.color : 0xffffff;
-		this.cellSprite.init(this);
+		this.cellSprite.init();
 	}
 
-	launchConvertionAnimation(color){
-		if(this.exNihilo.drawEvents)
-		{
+	launchConvertionAnimation(color) {
+		if (this.exNihilo.drawEvents) {
 			this.exNihilo.scene.cellConvertionEmitter.active = true
 			this.exNihilo.scene.cellConvertionEmitter.setPosition(this.x, this.y)
 			this.exNihilo.scene.cellConvertionEmitter.setTint(color)
@@ -47,10 +48,9 @@ export default class Cell {
 			this.exNihilo.scene.cellConvertionEmitter.explode()
 		}
 	}
-	
-	launchDestructionAnimation(color){
-		if(this.exNihilo.drawEvents)
-		{
+
+	launchDestructionAnimation(color) {
+		if (this.exNihilo.drawEvents) {
 			this.exNihilo.scene.cellDestructionEmmitter.active = true
 			this.exNihilo.scene.cellDestructionEmmitter.setPosition(this.x, this.y)
 			this.exNihilo.scene.cellDestructionEmmitter.setTint(color)
@@ -66,6 +66,7 @@ export default class Cell {
 		const gridHalfSizeY = gameSettings.grid.nbRow * this.side / 2;
 		const offSetX = window.innerWidth / 2 - gridHalfSizeX;
 		const offSetY = (window.innerHeight - gameSettings.score.board.height) / 2 - gridHalfSizeY + gameSettings.score.board.height;
+
 
 		return {
 			x: this.row * this.side + this.side / 2 + offSetX,
