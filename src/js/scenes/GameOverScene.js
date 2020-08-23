@@ -25,7 +25,7 @@ export default class GameOverScene extends Scene {
 			const scoreMessage = this.add.text(window.innerWidth / 2, 200 + 120 * index,
 				`${index === 0 ? '👑' : ''} ${this.exNihilo.players[index].nbPoints} Points`,
 				{
-					color: `#${this.exNihilo.players[index].color.toString(16).padStart(6, '0')}`, align: 'center', fontFamily: 'cursive', fontSize: 80
+					color: `#${this.exNihilo.players[index].color.toString(16).padStart(6, '0')}`, align: 'center', fontFamily: '"Open Sans"', fontSize: 80
 				});
 
 			scoreMessage.setPadding(20, 15);
