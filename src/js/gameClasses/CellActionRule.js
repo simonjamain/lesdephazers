@@ -3,6 +3,23 @@ export default class CellActionRule
     constructor(exNihilo)
     {
         this.exNihilo = exNihilo;
+        this.actions = [
+            'convert',
+            'circleConvert',
+            'neutralize',
+            'neutralizeAll',
+            'neutralizeAndCycle'
+        ]
+    }
+
+    /**
+     * Helpers
+     */
+
+    getRandomInt(min, max, rand) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(rand * (max - min +1)) + min;
     }
 
     /**
@@ -114,5 +131,34 @@ export default class CellActionRule
             player.removeMunition(force);
             cell.launchDestructionAnimation(prevPlayerColorOrCurrentPlayerColorIfEmpty);
         }
+    }
+
+    neutralizeAndCycle(player, cell, force = false)
+    {
+        if (force || player.getMunition() || (cell.player && player.color === cell.player.color))
+        {
+            let prevPlayerColorOrCurrentPlayerColorIfEmpty = (cell.player != null) ? cell.player.color : player.color;
+            if (cell.player && player.color === cell.player.color)
+                player.addMunition(force);
+            else
+                if (cell.player)
+                    player.removeMunition(force);
+            cell.setPlayer(null);
+            cell.launchDestructionAnimation(prevPlayerColorOrCurrentPlayerColorIfEmpty);
+        }
+    }
+
+    /**
+     * Bonus
+     */
+
+    random = (player, cell) => {
+        const rand = this.getRandomInt(1, this.actions.length, cell.rand) - 1;
+
+        cell.setPlayer(null);
+        this[this.actions[rand]](player, cell, true);
+        cell.special = false;
+        cell.action1 = this.exNihilo.defaultAction1;
+        cell.action2 = this.exNihilo.defaultAction2;
     }
 }

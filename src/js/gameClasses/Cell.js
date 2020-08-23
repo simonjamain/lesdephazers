@@ -18,6 +18,8 @@ export default class Cell {
 		this.x = this.getCoord().x;
 		this.y = this.getCoord().y;
 
+		this.special = false;
+		this.rand = null;
 		this.action1 = action1;
 		this.action2 = action2;
 
@@ -32,7 +34,7 @@ export default class Cell {
 	setPlayer = (player) => {
 		this.player = player;
 		this.color = this.player?.color && this.player !== null ? this.player.color : 0xffffff;
-		this.cellSprite.init(this);
+		this.cellSprite.init();
 	}
 
 	launchConvertionAnimation(color){
@@ -61,15 +63,9 @@ export default class Cell {
 	}
 
 	getCoord() {
-
-		const gridHalfSizeX = gameSettings.grid.nbCol * this.side / 2;
-		const gridHalfSizeY = gameSettings.grid.nbRow * this.side / 2;
-		const offSetX = window.innerWidth / 2 - gridHalfSizeX;
-		const offSetY = (window.innerHeight - gameSettings.score.board.height) / 2 - gridHalfSizeY + gameSettings.score.board.height;
-
 		return {
-			x: this.row * this.side + this.side / 2 + offSetX,
-			y: this.col * this.side + this.side / 2 + offSetY,
+			x: this.row * this.side + this.side / 2,
+			y: this.col * this.side + this.side / 2,
 		};
 	}
 	// exNihilo.doAction(action);

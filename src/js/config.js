@@ -33,10 +33,10 @@ const gameSettings = {
         cellSide: 17,
     },
     actions: {
-        action1: 'circleConvert',
-        action2: 'neutralizeAll'
+        action1: 'convert',
+        action2: 'neutralizeAndCycle'
     },
-    rule: 'basic',
+    rule: 'surprise',
     player: {
         speedX: 100,
         speedY: 70,
