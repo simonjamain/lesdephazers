@@ -22,6 +22,12 @@ class CellSprite extends GameObjects.Rectangle {
 	}
 
 	init = () => {
+		if(this.cell.exNihilo.drawEvents){
+			this.updateColor()
+		}
+	}
+
+	updateColor(){
 		this.setFillStyle(this.cell.color, 1);
 		this.setStrokeStyle(1, 0x000000);
 	}

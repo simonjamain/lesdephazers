@@ -14,6 +14,7 @@ export default class GameOverScene extends Scene {
 		// console.log('overpreload')
 		// let test = this.load.bitmapFont('pixelFont', '../../assets/fonts/font.png', '../../assets/fonts/font.xml');
 		// console.log('test', test)
+		
 
 	}
 
