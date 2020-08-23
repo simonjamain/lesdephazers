@@ -30,7 +30,11 @@ export default class MainScene extends Scene {
 
 		// this.input.on('pointermove', this.pointerMove, this);
 		// const circle = this.add.graphics();
-		// circle.fillStyle(0xff0000, 1);
+		// circle.
+		// circle.setPosition(10, 10);
+		// 	circle.fillStyle(0xFF0000, 1.0);
+		// circle.fillCircle(10, 10, 500);
+
 		// circle.x = 500;
 		// circle.y = 500;
 		// circle.z = 200;
