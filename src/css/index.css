@@ -51,8 +51,6 @@ body {
 	margin: 0;
 	background-color: #999;
 	overflow: hidden;
-
-	cursor: none;
 }
 
 body,
@@ -78,6 +76,7 @@ canvas {
 	display: block;
 	/* width: 800px; */
 	height: 100%;
+	cursor: none;
 }
 
 .fontLoader {
