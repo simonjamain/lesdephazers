@@ -1,5 +1,6 @@
 import { Scene, GameObjects } from 'phaser';
 import { gameSettings } from '../config';
+import { gameConfig } from '../index';
 export default class GameOverScene extends Scene {
 	constructor() {
 		super({ key: 'gameOverScene' });
@@ -70,6 +71,19 @@ export default class GameOverScene extends Scene {
 		board.fillStyle(this.exNihilo.player.color, 1);
 		board.fillRect(0, 0, this.width, gameSettings.score.board.height);
 
+		this.input.on('pointerdown', () => {
+			// delete this.exNihilo;
+			this.scene.start('mainScene')
+			// this.sys.game.destroy(true);
+
+			// document.addEventListener('mousedown', function newGame() {
+			// 	delete this.exNihilo;
+			// 	const game = new Phaser.Game(gameConfig);
+
+			// 	document.removeEventListener('mousedown', newGame);
+			// })
+		});
+
 		this.randFireworks();
 
 	}
@@ -107,6 +121,8 @@ export default class GameOverScene extends Scene {
 		this.winningFireworkEmitter.explode()
 		this.winningFireworkEmitter.explode()
 		this.winningFireworkEmitter.explode()
+
+
 	}
 
 	getRandomCoordX = () => {

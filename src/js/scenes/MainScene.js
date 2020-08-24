@@ -5,11 +5,11 @@ import { gameSettings, config } from '../config';
 export default class MainScene extends Scene {
 	constructor() {
 		super({ key: 'mainScene' });
-
 	}
 
 	init(data) {
-
+		if (this?.exNihilo)
+			delete this.exNihilo;
 
 		this.exNihilo = new ExNihilo();
 		document.exNihilo = this.exNihilo;
@@ -49,17 +49,18 @@ export default class MainScene extends Scene {
 			lifespan: 300,
 			gravityY: 0
 		});
+
+		this.exNihilo.setFinalSateRule();
 	}
 
 	update(time, delta) {
-		this.exNihilo.elapsedTime = Math.floor(time / 1000);
 		this.exNihilo.infosBoard.updateTime();
-		
+
 		this.crosshairGraphics.clear()
 		this.drawCrosshair()
 	}
 
-	drawCrosshair(){
+	drawCrosshair() {
 
 		let realPlayer = this.exNihilo.findPlayer(this.exNihilo.player.color)
 		var color = realPlayer.color;
@@ -67,7 +68,7 @@ export default class MainScene extends Scene {
 		var alpha = 1;
 		this.crosshairGraphics.lineStyle(thickness, color, alpha);
 		this.crosshairGraphics.fillStyle(color, alpha);
-	
+
 		var a = new Phaser.Geom.Point(this.game.input.mousePointer.x, this.game.input.mousePointer.y);
 
 		// outer
@@ -85,11 +86,10 @@ export default class MainScene extends Scene {
 			let xCoord = a.x + Math.cos(startingAngle + angleInterMunition * munitionIndex) * distance
 			let yCoord = a.y + Math.sin(startingAngle + angleInterMunition * munitionIndex) * distance
 
-			if(munitionIndex < realPlayer.nbMunitionLeft)
-			{
-				this.crosshairGraphics.fillCircle(xCoord,yCoord,15)
-			}else{
-				this.crosshairGraphics.strokeCircle(xCoord,yCoord,15)
+			if (munitionIndex < realPlayer.nbMunitionLeft) {
+				this.crosshairGraphics.fillCircle(xCoord, yCoord, 15)
+			} else {
+				this.crosshairGraphics.strokeCircle(xCoord, yCoord, 15)
 			}
 		}
 	}

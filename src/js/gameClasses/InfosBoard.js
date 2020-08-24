@@ -30,7 +30,9 @@ export default class InfoBoard {
 	}
 
 	updateTime() {
-		this.timeText.text = `Remaining : ${this.exNihilo.finalStateRule.maxTime - this.exNihilo.elapsedTime}s`;
+		let remainingTime = this.exNihilo.finalStateRule.getRemainingTime();
+		remainingTime = remainingTime >= 0 ? remainingTime : 0;
+		this.timeText.text = `Remaining : ${remainingTime}s`;
 	}
 
 	updateGenerationBar(timeRemaining) {

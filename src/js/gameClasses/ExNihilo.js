@@ -10,10 +10,12 @@ import InfosBoard from './InfosBoard';
 
 export class ExNihilo {
 	timeElapsed = 0;
+	constructor() {
+	}
 
 	init({ scene, w, h }) {
-		this.multiplayerServer = new MultiplayerServer(this, "http://vps.simonjamain.fr:3000")//Note : this has to be set early
-		// this.multiplayerServer = new MultiplayerServer(this, "http://localhost:3002")//Note : this has to be set early
+		// this.multiplayerServer = new MultiplayerServer(this, "http://vps.simonjamain.fr:3000")//Note : this has to be set early
+		this.multiplayerServer = new MultiplayerServer(this, "http://localhost:3002")//Note : this has to be set early
 		this.cellActionRule = new CellActionRule(this);
 		this.cellIterationRule = new CellIterationRule(this);
 
@@ -45,11 +47,15 @@ export class ExNihilo {
 		this.players = [];
 		this.players.push(this.player);
 
-		this.finalStateRule = new FinalStateRule(this);
-		this.elapsedTime = 0; /** seconds */
+		this.startingTime = new Date();
+		// this.elapsedTime = 0; /** seconds */
 		this.infosBoard = new InfosBoard(this);
 		this.gameEnd = false;
 
+	}
+
+	setFinalSateRule = () => {
+		this.finalStateRule = new FinalStateRule(this);
 	}
 
 	/**
@@ -73,7 +79,7 @@ export class ExNihilo {
 				row.setPlayer(row.player);
 			})
 		});
-		this.checkFinalState();
+
 	}
 
 	/**
@@ -97,11 +103,6 @@ export class ExNihilo {
 	/**
 	 * Action from server - END
 	 */
-
-	checkFinalState() {
-		this.finalStateRule.checkState();
-
-	}
 
 	/** To server */
 	/** @param action : 'action1', 'action2', etc. */
