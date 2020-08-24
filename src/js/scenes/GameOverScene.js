@@ -11,6 +11,7 @@ export default class GameOverScene extends Scene {
 		this.exNihilo = data.exNihilo;
 		this.width = this.sys.game.config.width;
 		this.height = this.sys.game.config.height;
+		this.isSceneOver = false;
 	}
 
 	preload() {
@@ -72,7 +73,7 @@ export default class GameOverScene extends Scene {
 		board.fillRect(0, 0, this.width, gameSettings.score.board.height);
 
 		this.input.on('pointerdown', () => {
-			// delete this.exNihilo;
+			this.isSceneOver = true;
 			this.scene.start('mainScene')
 			// this.sys.game.destroy(true);
 
@@ -89,12 +90,11 @@ export default class GameOverScene extends Scene {
 	}
 
 	randFireworks = () => {
+		if (document.hidden || this.isSceneOver)
+			return;
 
 		const f = Math.random() * .8 + .4;
 		this.launchFirework(this.getRandomCoordX(), this.getRandomCoordY(), f);
-
-		if (document.hidden)
-			return;
 
 		setTimeout(this.randFireworks, Math.random() * 1000);
 	}
