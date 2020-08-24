@@ -67,7 +67,7 @@ export default class GameOverScene extends Scene {
 		}
 
 		const board = this.add.graphics();
-		board.fillStyle(this.exNihilo.player.color, .9);
+		board.fillStyle(this.exNihilo.player.color, 1);
 		board.fillRect(0, 0, this.width, gameSettings.score.board.height);
 
 		this.randFireworks();

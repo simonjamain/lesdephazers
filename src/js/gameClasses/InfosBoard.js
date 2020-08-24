@@ -12,7 +12,7 @@ export default class InfoBoard {
 
 	createGraphics() {
 		const board = this.scene.add.graphics();
-		board.fillStyle(this.exNihilo.player.color, .9);
+		board.fillStyle(this.exNihilo.player.color, 1);
 		board.fillRect(0, 0, window.innerWidth, gameSettings.score.board.height);
 
 		this.generationBar = new GameObjects.Rectangle(this.scene,
