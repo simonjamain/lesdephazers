@@ -27,8 +27,12 @@ export default class Cell {
 		this.futurPlayer = null;
 		this.color = this.player?.color ? this.player.color : 0xffffff;
 
-		this.cellSprite = new CellSprite(this);
+		this.cellSprite = null;
 		this.rule = rule;
+	}
+
+	setCellSprite = () => {
+		this.cellSprite = new CellSprite(this);
 	}
 
 	setPlayer = (player) => {

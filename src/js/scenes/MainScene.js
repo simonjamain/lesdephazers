@@ -27,6 +27,8 @@ export default class MainScene extends Scene {
 	}
 
 	create(data) {
+		this.exNihilo.cells.map(col => col.map(row => row.setCellSprite()));
+
 		this.crosshairGraphics = this.add.graphics()
 		document.crosshairGraphics = this.crosshairGraphics
 
