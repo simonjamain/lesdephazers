@@ -2,7 +2,7 @@ export default class FinalStateRule {
     constructor(exNihilo) {
         this.exNihilo = exNihilo;
 
-        this.maxTime = 120;
+        this.maxTime = 1;
 
         this.timer = this.exNihilo.scene.time.addEvent({
             delay: this.maxTime * 1000,

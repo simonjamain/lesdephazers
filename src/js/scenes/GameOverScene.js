@@ -1,4 +1,4 @@
-import { Scene, GameObjects } from 'phaser';
+import { Scene, GameObjects, BlendModes } from 'phaser';
 import { gameSettings } from '../config';
 import { gameConfig } from '../index';
 export default class GameOverScene extends Scene {
@@ -12,6 +12,8 @@ export default class GameOverScene extends Scene {
 		this.width = this.sys.game.config.width;
 		this.height = this.sys.game.config.height;
 		this.isSceneOver = false;
+
+		this.sys.canvas.style.cursor = "auto";
 	}
 
 	preload() {
@@ -72,18 +74,7 @@ export default class GameOverScene extends Scene {
 		board.fillStyle(this.exNihilo.player.color, 1);
 		board.fillRect(0, 0, this.width, gameSettings.score.board.height);
 
-		this.input.on('pointerdown', () => {
-			this.isSceneOver = true;
-			this.scene.start('mainScene')
-			// this.sys.game.destroy(true);
-
-			// document.addEventListener('mousedown', function newGame() {
-			// 	delete this.exNihilo;
-			// 	const game = new Phaser.Game(gameConfig);
-
-			// 	document.removeEventListener('mousedown', newGame);
-			// })
-		});
+		this.createRestartButton();
 
 		this.randFireworks();
 
@@ -135,7 +126,52 @@ export default class GameOverScene extends Scene {
 		return y;
 	}
 
-	update(time, delta) {
+	createRestartButton = () => {
+		const invertColor = this.blackOrWhite(this.exNihilo.player.color);
+
+		this.buttonText = this.add.text(0, 0, "Restart", { color: `#${invertColor}`, align: 'center', fontFamily: '"Open Sans"', fontSize: 32 });
+		// this.buttonText.setShadow(2, 2, `#${invertColor}`, 1);
+		this.buttonText.setPadding(7, 2, 7, 2);
+		this.buttonText.setY(gameSettings.score.board.height / 2 - this.buttonText.height / 2);
+
+		this.buttonBox = this.add.rectangle(this.buttonText.width / 2, gameSettings.score.board.height / 2, this.buttonText.width, this.buttonText.height, 0x000000, 0);
+		this.buttonBox.setStrokeStyle(4, `0x${invertColor}`, 1);
+
+
+		this.button = this.add.container(20, 0, [this.buttonBox, this.buttonText]);
+
+		this.buttonBox.setInteractive();
+
+		this.buttonBox.on('pointerdown', () => {
+			this.isSceneOver = true;
+			this.scene.start('mainScene')
+		});
+
+		this.buttonBox.on('pointerover', () => {
+			this.sys.canvas.style.cursor = "pointer";
+		})
+
+		this.buttonBox.on('pointerout', () => {
+			this.sys.canvas.style.cursor = "auto";
+		})
 	}
+
+	invertDecimalToHex = (decimalColor) => {
+		const hexaColor = decimalColor.toString(16);
+		return (Number(`0x1${hexaColor}`) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase()
+	}
+
+	blackOrWhite = (decimalColor) => {
+		const hexaColor = decimalColor.toString(16);
+		const r = parseInt(hexaColor.slice(0, 2), 16),
+			g = parseInt(hexaColor.slice(2, 4), 16),
+			b = parseInt(hexaColor.slice(4, 6), 16);
+
+		return (r * 0.299 + g * 0.587 + b * 0.114) > 186
+			? '000000'
+			: 'FFFFFF';
+
+	}
+
 }
 
