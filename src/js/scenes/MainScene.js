@@ -19,6 +19,7 @@ export default class MainScene extends Scene {
 			h: gameSettings.grid.nbRow
 		});
 		this.input.mouse.disableContextMenu();
+		this.sys.canvas.style.cursor = "none";
 	}
 
 	preload() {
