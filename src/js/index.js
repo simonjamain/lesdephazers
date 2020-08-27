@@ -8,7 +8,6 @@ const gameConfig = {
 	scene: [MainScene, GameOverScene],
 };
 
-
 const game = new Game(gameConfig);
 
 export { gameConfig };

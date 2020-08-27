@@ -91,3 +91,20 @@ canvas {
 	font-weight: 400;
 	font-size: 1px;
 }
+
+.serverError {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	background-color: #fff;
+	color: red;
+	border: 3px solid red;
+	border-radius: 2px;
+	padding: 20px 40px;
+
+	font-family: 'Open Sans';
+	font-weight: 400;
+	font-size: 23px;
+}
